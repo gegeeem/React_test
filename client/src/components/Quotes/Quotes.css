@@ -1,0 +1,57 @@
+.container-qoute{
+    display: flex;
+    background-color: rgb(102, 90, 114);
+   
+    color:aliceblue;
+    margin-bottom: 5px;
+    max-width: 70%;
+    min-height: 100px;
+    padding: 12px;
+    
+}
+
+.numberOfVotes{
+    padding: 5px;
+    flex: 30% 1 auto;
+   
+}
+
+.procentOfGrades{
+    font-size:25px;
+}
+.red{
+    color: red;
+}
+.orange{
+    color: orange;
+}
+.green{
+    color: rgb(4, 175, 4);
+}
+
+.textOfQuote{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color:rgb(245, 246, 248);
+    color: rgb(102, 90, 114);
+    padding: 8px;
+   
+    flex: 1 1 auto;
+    border-radius: 5px;
+
+}
+
+.author{
+    display: block;
+    align-self: flex-end;
+}
+
+.vote{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+
+}

@@ -14,11 +14,8 @@ export default function LoginPage({ logedFunc, errorFunc }) {
     axios
       .post("http://localhost:8000/sessions", login)
       .then((response) => {
-        localStorage.setItem(
-          "token",
-          JSON.stringify(response.data.accessToken)
-        );
-        logedFunc(true);
+        localStorage.setItem("token", response.data.accessToken);
+        logedFunc(response.data.accessToken);
         setErrorMessage(`poruka sa logina`);
         setInputUserPass({ username: "", password: "" });
         // errorFunc(errorMessage);
