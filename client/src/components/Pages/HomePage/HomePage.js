@@ -13,7 +13,7 @@ export default function HomePage({ isLoged, logedFunc }) {
   const [tags, setTags] = useState([]);
   const [paramsForGetQoute, setParamsForGetQoute] = useState({
     pageSize: "3",
-    page: "1",
+    page: "",
     sortBy: "createdAt",
     sortDirection: "asc",
     tags: "",
@@ -31,28 +31,11 @@ export default function HomePage({ isLoged, logedFunc }) {
   function NumberOfPagesForQoutes(numOfQoutes, numOfPages) {
     return Math.ceil(numOfQoutes / numOfPages);
   }
-  function getQoutes(params) {
-    axios
-      .get(
-        `http://localhost:8000/quotes?sortBy=${params.sortBy}&sortDirection=${params.sortDirection}&tags=${params.tags}&pageSize=${params.pageSize}&page=${params.page}`,
-        {
-          headers: {
-            Authorization: "Bearer " + tok1,
-          },
-        }
-      )
-      .then((res) => {
-        //   console.log("quotes", res);
-        setQuotes(res.data.quotes);
-        setNumberOfQoutes(res.data.quotesCount);
-
-        console.log("response from quotes", res);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  }
-
+  useEffect(() => {
+    setParamsForGetQoute((prev) => {
+      return { ...prev, page: pageStep.toString() };
+    });
+  }, [pageStep]);
   useEffect(() => {
     axios
       .get("http://localhost:8000/tags", {
@@ -70,6 +53,7 @@ export default function HomePage({ isLoged, logedFunc }) {
   }, [tags.length]);
 
   useEffect(() => {
+    console.log("sueEffect za parametre pozvana");
     // axios
     //   .get("http://localhost:8000/tags", {
     //     headers: {
@@ -117,10 +101,32 @@ export default function HomePage({ isLoged, logedFunc }) {
     //   .catch((err) => {
     //     // console.log(err);
     //   });
+    function getQoutes(params) {
+      axios
+        .get(
+          `http://localhost:8000/quotes?sortBy=${params.sortBy}&sortDirection=${params.sortDirection}&tags=${params.tags}&pageSize=${params.pageSize}&page=${params.page}`,
+          {
+            headers: {
+              Authorization: "Bearer " + tok1,
+            },
+          }
+        )
+        .then((res) => {
+          //   console.log("quotes", res);
+          setQuotes(res.data.quotes);
+          setNumberOfQoutes(res.data.quotesCount);
+
+          console.log("response from quotes", res);
+        })
+        .catch((err) => {
+          // console.log(err);
+        });
+    }
     getQoutes(paramsForGetQoute);
     // }, [token, quotes.content, quotes.givenVote, paramsForGetQoute]);
-  }, [token, paramsForGetQoute.page]);
+  }, [token, paramsForGetQoute]);
   console.log(paramsForGetQoute);
+  console.log("stepPage", pageStep);
 
   return (
     <>
@@ -188,10 +194,12 @@ export default function HomePage({ isLoged, logedFunc }) {
         ))}
       </ul>
       <button
-        onClick={() => {
-          setParamsForGetQoute((prev) => {
-            return { ...prev, page: (counter++).toString() };
-          });
+        onClick={(e) => {
+          // setParamsForGetQoute((prev) => {
+          //   return { ...prev, page: (counter++).toString() };
+          // });
+          setPageStep(++counter);
+          e.preventDefault();
         }}
       >
         Next
