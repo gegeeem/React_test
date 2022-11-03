@@ -3,6 +3,10 @@ import axios from "axios";
 import Quote from "../../Quotes/Quote";
 import AddNewPost from "../../AddNewPost/AddNewPost";
 import TagsList from "../../TagsList/TagsList";
+import TagL from "../../TagsList/TagL";
+import MultipleSelectCheckmarks from "../../TagsList/MTagList";
+import "./HomePage.css";
+
 let counter = 1;
 export default function HomePage({ isLoged, logedFunc }) {
   const [addedNewQoute, setAddedNewQoute] = useState(false);
@@ -154,11 +158,16 @@ export default function HomePage({ isLoged, logedFunc }) {
           <option value={"author"}>Author</option>
           <option value={"upvotesCount"}>Upvotes Count</option>
         </select>
-        <TagsList tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} />
+        {/* <TagsList tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
         <button onClick={() => setDisplayAddPost("showContent")}>
           + New Post
         </button>
+
         <button onClick={() => LogOut()}>LogOut</button>
+
+        <TagL tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} />
+
+        {/* <MultipleSelectCheckmarks /> */}
       </div>
       broj postova {numberOfQoutes}
       <div>Novi citat{addedNewQoute}</div>
@@ -198,7 +207,8 @@ export default function HomePage({ isLoged, logedFunc }) {
           // setParamsForGetQoute((prev) => {
           //   return { ...prev, page: (counter++).toString() };
           // });
-          setPageStep(++counter);
+          const a = pageStep + 1;
+          setPageStep(a);
           e.preventDefault();
         }}
       >
