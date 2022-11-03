@@ -1,14 +1,14 @@
 * {
   box-sizing: border-box;
 }
-.dropdown {
+.dropdown-s {
   position: relative;
   margin-bottom: 20px;
   border-radius: 15px;
   width: 300px;
   
 }
-.dropdown .dropdown-list {
+.dropdown-s .dropdown-list {
   padding: 25px 20px;
   background: #fff;
   position: absolute;
@@ -43,6 +43,26 @@
   padding: 0 40px 0 20px;
   cursor: pointer;
   position: relative;
+}
+.input-label {
+  display: block;
+  height: 40px;
+  font-size: 16px;
+  line-height: 42px;
+  background: #fff;
+  border: 0;
+ 
+
+ 
+  padding: 5px 10px 0 10px;
+  margin-right: 20px;
+  margin-left: 20px;
+  cursor: pointer;
+  position: relative;
+}
+.input-label:focus{
+  outline: 0px;
+  background-color: rgb(248, 244, 244);
 }
 .dropdown .dropdown-label:before {
   content: '▼';

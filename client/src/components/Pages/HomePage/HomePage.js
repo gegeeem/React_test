@@ -6,6 +6,11 @@ import TagsList from "../../TagsList/TagsList";
 import TagL from "../../TagsList/TagL";
 import MultipleSelectCheckmarks from "../../TagsList/MTagList";
 import "./HomePage.css";
+import SearchTags from "../../TagsList/SearchTags";
+import AscDesc from "../../AscDesc/AscDesc";
+import TagsMui from "../../TagsList/TagsMui";
+import Pagination from "../../Pagination/Pagination";
+import PaginationFor from "../../Pagination/Pagination";
 
 let counter = 1;
 export default function HomePage({ isLoged, logedFunc }) {
@@ -16,7 +21,7 @@ export default function HomePage({ isLoged, logedFunc }) {
   console.log("HomePagepozvana");
   const [tags, setTags] = useState([]);
   const [paramsForGetQoute, setParamsForGetQoute] = useState({
-    pageSize: "3",
+    pageSize: "5",
     page: "",
     sortBy: "createdAt",
     sortDirection: "asc",
@@ -135,7 +140,17 @@ export default function HomePage({ isLoged, logedFunc }) {
   return (
     <>
       <div className="menu">
-        <select
+        <AscDesc
+          label={"Direction"}
+          defaulValue={["asc", "desc"]}
+          changeDirectionFunc={(val) =>
+            setParamsForGetQoute((prev) => {
+              return { ...prev, sortDirection: val, page: "1" };
+            })
+          }
+        />
+        {/* <select
+          className="ascDesc"
           defaultValue={paramsForGetQoute.sortDirection}
           onChange={(e) =>
             setParamsForGetQoute((prev) => {
@@ -143,10 +158,23 @@ export default function HomePage({ isLoged, logedFunc }) {
             })
           }
         >
-          <option value={"asc"}>ASC</option>
-          <option value={"desc"}>DESC</option>
-        </select>
-        <select
+          <option className="optAscDesc" value={"asc"}>
+            ASC
+          </option>
+          <option className="optAscDesc" value={"desc"}>
+            DESC
+          </option>
+        </select> */}
+        <AscDesc
+          label={"Sorted By"}
+          defaulValue={["createdAt", "author", "upvotesCount"]}
+          changeDirectionFunc={(val) => {
+            setParamsForGetQoute((prev) => {
+              return { ...prev, sortBy: val, page: "1" };
+            });
+          }}
+        />
+        {/* <select
           onChange={(e) => {
             setParamsForGetQoute((prev) => {
               return { ...prev, sortBy: e.target.value };
@@ -157,25 +185,21 @@ export default function HomePage({ isLoged, logedFunc }) {
           <option value={"createdAt"}>Created At</option>
           <option value={"author"}>Author</option>
           <option value={"upvotesCount"}>Upvotes Count</option>
-        </select>
+        </select> */}
         {/* <TagsList tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
+        {/* <TagL tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
+        <TagsMui tags={tags} selectTagsFunc={(e) => setParamsForGetQoute(e)} />
         <button onClick={() => setDisplayAddPost("showContent")}>
           + New Post
         </button>
 
         <button onClick={() => LogOut()}>LogOut</button>
 
-        <TagL tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} />
+        {/* <SearchTags tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
 
         {/* <MultipleSelectCheckmarks /> */}
       </div>
       broj postova {numberOfQoutes}
-      <div>Novi citat{addedNewQoute}</div>
-      <div>
-        {tags?.map((el, index) => (
-          <span key={index}>{el}, </span>
-        ))}
-      </div>
       <AddNewPost
         display={displayAddPost}
         closeFunc={() => setDisplayAddPost("hideContent")}
@@ -202,6 +226,15 @@ export default function HomePage({ isLoged, logedFunc }) {
           />
         ))}
       </ul>
+      <PaginationFor
+        currPage={+paramsForGetQoute.page}
+        numberOfPage={Math.ceil(numberOfQoutes / 5)}
+        selectPageFunc={(val) =>
+          setParamsForGetQoute((prev) => {
+            return { ...prev, page: val };
+          })
+        }
+      />
       <button
         onClick={(e) => {
           // setParamsForGetQoute((prev) => {
