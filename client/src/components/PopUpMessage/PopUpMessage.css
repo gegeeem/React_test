@@ -1,0 +1,12 @@
+.pop{
+    display: none;
+   
+}
+.show{
+display: block;
+position: absolute; /* Stay in place */
+z-index: 2; /* Sit on top */
+right:50vw;
+top: 0px;
+background-color: aliceblue;
+}

@@ -11,6 +11,7 @@ import AscDesc from "../../AscDesc/AscDesc";
 import TagsMui from "../../TagsList/TagsMui";
 import Pagination from "../../Pagination/Pagination";
 import PaginationFor from "../../Pagination/Pagination";
+import PopUpMessage from "../../PopUpMessage/PopUpMessage";
 
 let counter = 1;
 export default function HomePage({ isLoged, logedFunc }) {
@@ -30,6 +31,11 @@ export default function HomePage({ isLoged, logedFunc }) {
 
   const [numberOfQoutes, setNumberOfQoutes] = useState(0);
   const [pageStep, setPageStep] = useState(1);
+  const [message, setMessage] = useState({
+    type: "",
+    text: "",
+  });
+  const [displayMessage, setDisplayMessage] = useState("pop"); // for clasname dipla block
 
   const tok1 = localStorage.getItem("token");
 
@@ -40,6 +46,24 @@ export default function HomePage({ isLoged, logedFunc }) {
   function NumberOfPagesForQoutes(numOfQoutes, numOfPages) {
     return Math.ceil(numOfQoutes / numOfPages);
   }
+  // useEffect(() => {
+  //   function PopMessage() {
+  //     setDisplayMessage("show");
+  //     // setTimeout(2000);
+  //     // setMessage("");
+  //     // setDisplayMessage("pop");
+  //     const timer = setTimeout(() => {
+  //       setDisplayMessage("pop");
+  //       setMessage("");
+  //     }, 3000);
+  //     return () => clearTimeout(timer);
+  //   }
+  //   if (message) {
+  //     PopMessage();
+  //   }
+  //   console.log("message", message);
+  // }, [message]);
+
   useEffect(() => {
     setParamsForGetQoute((prev) => {
       return { ...prev, page: pageStep.toString() };
@@ -125,7 +149,7 @@ export default function HomePage({ isLoged, logedFunc }) {
           setQuotes(res.data.quotes);
           setNumberOfQoutes(res.data.quotesCount);
 
-          console.log("response from quotes", res);
+          // console.log("response from quotes", res);
         })
         .catch((err) => {
           // console.log(err);
@@ -133,9 +157,7 @@ export default function HomePage({ isLoged, logedFunc }) {
     }
     getQoutes(paramsForGetQoute);
     // }, [token, quotes.content, quotes.givenVote, paramsForGetQoute]);
-  }, [token, paramsForGetQoute]);
-  console.log(paramsForGetQoute);
-  console.log("stepPage", pageStep);
+  }, [token, paramsForGetQoute, tags.length]);
 
   return (
     <>
@@ -205,6 +227,12 @@ export default function HomePage({ isLoged, logedFunc }) {
         closeFunc={() => setDisplayAddPost("hideContent")}
         addNewQouteFunc={(qoutes) => setQuotes(qoutes)}
         addNewQouteTagFunc={(tags) => setTags(tags)}
+        showMessage={(val) => setMessage(val)}
+      />
+      <PopUpMessage
+        typeOfMessage={message.type}
+        message={message.text}
+        messageFuncSetUp={(val) => setMessage(val)}
       />
       <ul>
         {/* {quotes?.map((el) => (
@@ -235,7 +263,7 @@ export default function HomePage({ isLoged, logedFunc }) {
           })
         }
       />
-      <button
+      {/* <button
         onClick={(e) => {
           // setParamsForGetQoute((prev) => {
           //   return { ...prev, page: (counter++).toString() };
@@ -246,7 +274,7 @@ export default function HomePage({ isLoged, logedFunc }) {
         }}
       >
         Next
-      </button>
+      </button> */}
     </>
   );
 }

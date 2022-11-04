@@ -8,6 +8,7 @@ export default function AddNewPost({
   addNewQouteFunc,
   closeFunc,
   addNewQouteTagFunc,
+  showMessage,
 }) {
   const [newPost, setNewPost] = useState({
     content: "",
@@ -57,18 +58,33 @@ export default function AddNewPost({
           tags: [],
         });
         setTags([]);
+        setTag("");
         addNewQouteFunc((prev) => {
           return [...prev, response.data];
         });
         addNewQouteTagFunc((prev) => {
-          return [...prev, response.data.tags
-          ];
+          return [...prev, response.data.tags];
         });
-        console.log(response);
-        alert(response.status);
+
+        showMessage({ type: "success", text: response.statusText });
+        console.log("Response", response);
       })
       .catch((e) => {
-        console.log(e);
+        setSendPost({
+          content: "",
+          author: "",
+          tags: [],
+        });
+        setNewPost({
+          content: "",
+          author: "",
+          tags: [],
+        });
+        setTag("");
+        setTags([]);
+        console.log(e.response.data);
+        showMessage({ type: "warning", text: e.response.data.author });
+        alert(e);
       });
   }
   useEffect(() => {
@@ -112,6 +128,7 @@ export default function AddNewPost({
                   })
                 }
                 autoFocus
+                required
               />
             </div>
             <div>
@@ -127,6 +144,7 @@ export default function AddNewPost({
                     return { ...prev, author: e.target.value };
                   })
                 }
+                required
               />
             </div>
             <div>
@@ -154,6 +172,7 @@ export default function AddNewPost({
                 onChange={(e) => {
                   setTag(e.target.value);
                 }}
+                required
               />
               <input
                 type={"submit"}
@@ -173,6 +192,7 @@ export default function AddNewPost({
                 setSendPost(newPost);
                 // addPostRequest(newPost);
                 // e.preventDefault();
+
                 closeFunc();
               }}
             />

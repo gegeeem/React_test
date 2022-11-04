@@ -59,14 +59,12 @@ export default function Quote({
       },
     })
       .then((res) => {
-        console.log(res);
         alert("uspesno ste glasali");
         const a = () => {
           funcVote = "success";
         };
       })
       .catch((err) => {
-        console.log(err);
         funcVote = "error";
         alert(err);
       });

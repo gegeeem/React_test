@@ -47,7 +47,8 @@ export default function TagsMui({ tags, selectTagsFunc }) {
   useEffect(() => {
     if (personName.length) {
       selectTagsFunc((prev) => {
-        return { ...prev, tags: personName.join(",") };
+        return { ...prev, tags: personName.join(",")
+       };
       });
     } else {
       selectTagsFunc((prev) => {
