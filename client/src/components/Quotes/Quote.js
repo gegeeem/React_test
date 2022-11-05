@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../Quotes/Quotes.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { fa2, faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import HSLToRGB from "../../HSL to RGB/HslToRgb";
 
 // import upVoteForPost from "../../gettingRequest/upVoteForPost";
 
@@ -36,24 +37,24 @@ export default function Quote({
       return 100;
     }
   };
-  const colorForPercentage = (percentage, upVote, downVote) => {
-    if (upVote > 0 && downVote > 0) {
-      if (percentage <= 41) {
-        return "procentOfGrades red";
-      } else if (percentage <= 81) {
-        return "procentOfGrades orange";
-      } else {
-        return "procentOfGrades green";
-      }
-    }
-    if (percentage === 0) {
-      return "procentOfGrades";
-    } else if (upVote > 0 && downVote === 0) {
-      return "procentOfGrades green";
-    } else if (upVote === 0 && downVote > 0) {
-      return "procentOfGrades red";
-    }
-  };
+  // const colorForPercentage = (percentage, upVote, downVote) => {
+  //   if (upVote > 0 && downVote > 0) {
+  //     if (percentage <= 41) {
+  //       return "procentOfGrades red";
+  //     } else if (percentage <= 81) {
+  //       return "procentOfGrades orange";
+  //     } else {
+  //       return "procentOfGrades green";
+  //     }
+  //   }
+  //   if (percentage === 0) {
+  //     return "procentOfGrades";
+  //   } else if (upVote > 0 && downVote === 0) {
+  //     return "procentOfGrades green";
+  //   } else if (upVote === 0 && downVote > 0) {
+  //     return "procentOfGrades red";
+  //   }
+  // };
 
   function upVoteForPost(id, action, method, funcVote) {
     const token = localStorage.getItem("token");
@@ -85,6 +86,7 @@ export default function Quote({
       <div className="vote">
         <FontAwesomeIcon
           icon={faCaretUp}
+          size={"xl"}
           beatFade={votedAnime}
           color={givenVote !== "upvote" ? "rgb(55, 47, 63)" : ""}
           onClick={() => {
@@ -125,11 +127,19 @@ export default function Quote({
         />
 
         <div
-          className={colorForPercentage(
-            gradesPercentage(upvotesCount, downvotesCount),
-            upvotesCount,
-            downvotesCount
-          )}
+          // className={colorForPercentage(
+          //   gradesPercentage(upvotesCount, downvotesCount),
+          //   upvotesCount,
+          //   downvotesCount
+          // )}
+          className="procentOfGrades"
+          style={{
+            color: HSLToRGB(
+              gradesPercentage(upvotesCount, downvotesCount),
+              98,
+              50
+            ),
+          }}
         >
           {gradesPercentage(upvotesCount, downvotesCount)}%
         </div>
