@@ -114,12 +114,13 @@ export default function AddNewPost({
         </div>
         <div className="modal-body">
           <div className="form">
-            <div>
-              <label htmlFor="content">Content</label>
-              <input
+            <div className="qoute-container">
+              {/* <label htmlFor="content">Content</label> */}
+              <textarea
+                className="textarea-post"
                 value={newPost.content}
                 onFocus={(e) => (e.target.value = "")}
-                type={"text"}
+                type={"textarea"}
                 placeholder="Add some quote here..."
                 id="content"
                 onChange={(e) =>
@@ -130,13 +131,12 @@ export default function AddNewPost({
                 autoFocus
                 required
               />
-            </div>
-            <div>
-              <label htmlFor="author">Author</label>
+
+              {/* <label htmlFor="author">Author</label> */}
               <input
+                className="input-author"
                 value={newPost.author}
                 onFocus={(e) => (e.target.value = "")}
-                type={"text"}
                 placeholder="Author's name..."
                 id="author"
                 onChange={(e) =>
@@ -147,16 +147,10 @@ export default function AddNewPost({
                 required
               />
             </div>
+          </div>
+          <div>
             <div>
               <label htmlFor="tags">Add new tags: </label>
-              {/* {newPost.tags.join()} */}
-              {newPost.tags.map((el, i) => (
-                <Tag
-                  key={el}
-                  name={el}
-                  removeFunc={() => setTags(removeTag(i, tags))}
-                />
-              ))}
 
               <input
                 value={tag}
@@ -174,33 +168,72 @@ export default function AddNewPost({
                 }}
                 required
               />
+              {tag ? (
+                <input
+                  type={"submit"}
+                  value={"add"}
+                  onClick={(e) => {
+                    setTags((prev) => {
+                      return [...prev, tag];
+                    });
+                    setTag("");
+                    e.preventDefault();
+                  }}
+                />
+              ) : (
+                <input
+                  type={"submit"}
+                  value={"add"}
+                  onClick={(e) => {
+                    setTags((prev) => {
+                      return [...prev, tag];
+                    });
+                    setTag("");
+                    e.preventDefault();
+                  }}
+                  disabled
+                />
+              )}
+              <div>
+                {/* {newPost.tags.join()} */}
+                {newPost.tags.map((el, i) => (
+                  <Tag
+                    key={el}
+                    name={el}
+                    removeFunc={() => setTags(removeTag(i, tags))}
+                  />
+                ))}
+              </div>
+            </div>
+            {newPost.author && newPost.content && newPost.tags.length ? (
               <input
-                type={"submit"}
-                value={"add"}
+                type="submit"
                 onClick={(e) => {
-                  setTags((prev) => {
-                    return [...prev, tag];
-                  });
-                  setTag("");
-                  e.preventDefault();
+                  setSendPost(newPost);
+                  // addPostRequest(newPost);
+                  // e.preventDefault();
+
+                  closeFunc();
                 }}
               />
-            </div>
-            <input
-              type="submit"
-              onClick={(e) => {
-                setSendPost(newPost);
-                // addPostRequest(newPost);
-                // e.preventDefault();
+            ) : (
+              <input
+                type="submit"
+                onClick={(e) => {
+                  setSendPost(newPost);
+                  // addPostRequest(newPost);
+                  // e.preventDefault();
 
-                closeFunc();
-              }}
-            />
+                  closeFunc();
+                }}
+                disabled
+              />
+            )}
           </div>
         </div>
-        <div className="modal-footer">
+        {/* <div className="modal-footer">
           <h4>Qoutes</h4>
-        </div>
+        </div> */}
       </div>
     </div>
   );

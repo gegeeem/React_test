@@ -19,7 +19,7 @@ export default function PopUpMessage({
       // setDisplayMessage("pop");
       const timer = setTimeout(() => {
         setDisplayMessage("pop");
-        messageFuncSetUp({ type: "", text: "" });
+        messageFuncSetUp({ type: "success", text: "" });
       }, 3000);
       return () => clearTimeout(timer);
     }

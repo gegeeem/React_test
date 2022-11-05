@@ -14,7 +14,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      width: 200,
     },
   },
 };
@@ -47,8 +47,7 @@ export default function TagsMui({ tags, selectTagsFunc }) {
   useEffect(() => {
     if (personName.length) {
       selectTagsFunc((prev) => {
-        return { ...prev, tags: personName.join(",")
-       };
+        return { ...prev, tags: personName.join(","), page: "1" };
       });
     } else {
       selectTagsFunc((prev) => {
@@ -59,7 +58,7 @@ export default function TagsMui({ tags, selectTagsFunc }) {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 200 }}>
         <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"

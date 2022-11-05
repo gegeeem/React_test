@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../Quotes/Quotes.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
@@ -14,7 +14,16 @@ export default function Quote({
   downvotesCount,
   givenVote,
   updateQuoteFunc,
+  addedQouteFuncTrigger,
 }) {
+  const [votedAnime, setVotedAnime] = useState(false);
+  function startVoteAnitamtion() {
+    setVotedAnime(true);
+    const timer = setTimeout(() => {
+      setVotedAnime(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }
   const gradesPercentage = (upVotes, downVotes) => {
     if (upVotes > 0 && downVotes > 0) {
       const up = (upVotes / (upVotes + downVotes)) * 100;
@@ -59,10 +68,12 @@ export default function Quote({
       },
     })
       .then((res) => {
-        alert("uspesno ste glasali");
-        const a = () => {
-          funcVote = "success";
-        };
+        // alert("uspesno ste glasali");
+        // const a = () => {
+        //   funcVote = "success";
+        // };
+        console.log("voted response", res);
+        // addedQouteFuncTrigger(true);
       })
       .catch((err) => {
         funcVote = "error";
@@ -74,7 +85,7 @@ export default function Quote({
       <div className="vote">
         <FontAwesomeIcon
           icon={faCaretUp}
-          beatFade={false}
+          beatFade={votedAnime}
           color={givenVote !== "upvote" ? "rgb(55, 47, 63)" : ""}
           onClick={() => {
             let message = "";
@@ -92,6 +103,8 @@ export default function Quote({
                   } else return el;
                 });
               });
+
+              startVoteAnitamtion();
             } else if (givenVote === "downvote") {
               upVoteForPost(id, "downvote", "delete");
               updateQuoteFunc((prev) => {
@@ -125,6 +138,7 @@ export default function Quote({
         </div>
         <FontAwesomeIcon
           icon={faCaretDown}
+          beat={votedAnime}
           color={givenVote !== "downvote" ? "rgb(55, 47, 63)" : ""}
           onClick={() => {
             if (givenVote === "none") {
@@ -140,6 +154,7 @@ export default function Quote({
                   } else return el;
                 });
               });
+              startVoteAnitamtion();
             } else if (givenVote === "upvote") {
               upVoteForPost(id, "upvote", "delete");
               updateQuoteFunc((prev) => {

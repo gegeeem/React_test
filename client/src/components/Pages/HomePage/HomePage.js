@@ -32,7 +32,7 @@ export default function HomePage({ isLoged, logedFunc }) {
   const [numberOfQoutes, setNumberOfQoutes] = useState(0);
   const [pageStep, setPageStep] = useState(1);
   const [message, setMessage] = useState({
-    type: "",
+    type: "success",
     text: "",
   });
   const [displayMessage, setDisplayMessage] = useState("pop"); // for clasname dipla block
@@ -149,18 +149,22 @@ export default function HomePage({ isLoged, logedFunc }) {
           setQuotes(res.data.quotes);
           setNumberOfQoutes(res.data.quotesCount);
 
-          // console.log("response from quotes", res);
+          console.log("response from quotes", res);
         })
         .catch((err) => {
           // console.log(err);
         });
     }
     getQoutes(paramsForGetQoute);
+    //
+    //ili resetuj ovde ako je moguce da je page: "1" za paramsForGetQoute
+    //
     // }, [token, quotes.content, quotes.givenVote, paramsForGetQoute]);
   }, [token, paramsForGetQoute, tags.length]);
-
+  console.log("paramsforgetqoute", paramsForGetQoute);
+  console.log("message", message);
   return (
-    <>
+    <div className="main-container">
       <div className="menu">
         <AscDesc
           label={"Direction"}
@@ -234,7 +238,7 @@ export default function HomePage({ isLoged, logedFunc }) {
         message={message.text}
         messageFuncSetUp={(val) => setMessage(val)}
       />
-      <ul>
+      <ul className="listOfQoutes">
         {/* {quotes?.map((el) => (
           <li key={el.id}>
             {el.content} upvote {el.downvotesCount}
@@ -251,6 +255,7 @@ export default function HomePage({ isLoged, logedFunc }) {
             downvotesCount={el.downvotesCount}
             givenVote={el.givenVote}
             updateQuoteFunc={(prev) => setQuotes(prev)}
+            addedQouteFuncTrigger={(e) => setAddedNewQoute(e)}
           />
         ))}
       </ul>
@@ -275,6 +280,6 @@ export default function HomePage({ isLoged, logedFunc }) {
       >
         Next
       </button> */}
-    </>
+    </div>
   );
 }

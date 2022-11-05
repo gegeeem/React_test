@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 export default function AscDesc({ label, defaulValue, changeDirectionFunc }) {
-  const [age, setAge] = React.useState([]);
+  const [age, setAge] = React.useState([defaulValue[0]]);
 
   const handleChange = (event) => {
     setAge(event.target.value);

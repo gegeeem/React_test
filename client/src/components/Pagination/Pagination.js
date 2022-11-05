@@ -25,7 +25,6 @@ export default function PaginationFor({
         count={numberOfPage}
         page={currPage}
         onChange={handleChange}
-        color={"secondary"}
       />
     </Stack>
   );

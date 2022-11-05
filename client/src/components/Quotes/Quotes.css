@@ -1,10 +1,12 @@
 .container-qoute{
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     background-color: rgb(102, 90, 114);
    
     color:aliceblue;
     margin-bottom: 5px;
-    max-width: 70%;
+    min-width: 80%;
     min-height: 100px;
     padding: 12px;
     
