@@ -25,3 +25,17 @@
 .listOfQoutes{
    width: 100%;
 }
+.newQouteButton.button{
+    color: rgb(59, 59, 59);
+    text-transform: none;
+    border: 2px solid rgb(255, 255, 255);
+    box-sizing: border-box;
+   
+}
+.newQouteButton.button:hover{
+color: rgb(93, 87, 114);
+background-color: #fff;
+border-bottom:2px solid rgb(93, 87, 114);
+border-bottom-left-radius: 0;
+border-bottom-right-radius: 0;
+}

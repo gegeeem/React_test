@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../Quotes/Quotes.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fa2, faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import HSLToRGB from "../../HSL to RGB/HslToRgb";
 
@@ -16,6 +16,7 @@ export default function Quote({
   givenVote,
   updateQuoteFunc,
   addedQouteFuncTrigger,
+  alreadyVotedMessagefunc,
 }) {
   const [votedAnime, setVotedAnime] = useState(false);
   function startVoteAnitamtion() {
@@ -55,7 +56,19 @@ export default function Quote({
   //     return "procentOfGrades red";
   //   }
   // };
-
+  function clrByPercentage(percentage, upVote, downVote) {
+    if (percentage === 0) {
+      return "rgb(245, 246, 248)";
+    } else if (upVote === 0 && downVote > 0) {
+      return HSLToRGB(
+        100 - gradesPercentage(upvotesCount, downvotesCount),
+        98,
+        50
+      );
+    } else {
+      return HSLToRGB(gradesPercentage(upvotesCount, downvotesCount), 98, 50);
+    }
+  }
   function upVoteForPost(id, action, method, funcVote) {
     const token = localStorage.getItem("token");
 
@@ -74,6 +87,7 @@ export default function Quote({
         //   funcVote = "success";
         // };
         console.log("voted response", res);
+        addedQouteFuncTrigger((prev) => !prev);
         // addedQouteFuncTrigger(true);
       })
       .catch((err) => {
@@ -86,8 +100,8 @@ export default function Quote({
       <div className="vote">
         <FontAwesomeIcon
           icon={faCaretUp}
-          size={"xl"}
-          beatFade={votedAnime}
+          size={"lg"}
+          beatFade={givenVote === "upvote" && votedAnime}
           color={givenVote !== "upvote" ? "rgb(55, 47, 63)" : ""}
           onClick={() => {
             let message = "";
@@ -121,7 +135,11 @@ export default function Quote({
                 });
               });
             } else {
-              alert("Already upvoted!");
+              // alert("Already upvoted!");
+              alreadyVotedMessagefunc({
+                type: "info",
+                text: "Already Upvoted",
+              });
             }
           }}
         />
@@ -134,10 +152,10 @@ export default function Quote({
           // )}
           className="procentOfGrades"
           style={{
-            color: HSLToRGB(
+            color: clrByPercentage(
               gradesPercentage(upvotesCount, downvotesCount),
-              98,
-              50
+              upvotesCount,
+              downvotesCount
             ),
           }}
         >
@@ -148,7 +166,8 @@ export default function Quote({
         </div>
         <FontAwesomeIcon
           icon={faCaretDown}
-          beat={votedAnime}
+          size={"lg"}
+          beatFade={givenVote === "downvote" && votedAnime}
           color={givenVote !== "downvote" ? "rgb(55, 47, 63)" : ""}
           onClick={() => {
             if (givenVote === "none") {
@@ -179,7 +198,11 @@ export default function Quote({
                 });
               });
             } else {
-              alert("Already upvoted!");
+              // alert("Already upvoted!");
+              alreadyVotedMessagefunc({
+                type: "info",
+                text: "Already Downvoted",
+              });
             }
           }}
         />

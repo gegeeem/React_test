@@ -12,6 +12,7 @@ import TagsMui from "../../TagsList/TagsMui";
 import Pagination from "../../Pagination/Pagination";
 import PaginationFor from "../../Pagination/Pagination";
 import PopUpMessage from "../../PopUpMessage/PopUpMessage";
+import { Button } from "@mui/material";
 
 let counter = 1;
 export default function HomePage({ isLoged, logedFunc }) {
@@ -86,7 +87,6 @@ export default function HomePage({ isLoged, logedFunc }) {
   }, [tags.length]);
 
   useEffect(() => {
-    console.log("sueEffect za parametre pozvana");
     // axios
     //   .get("http://localhost:8000/tags", {
     //     headers: {
@@ -160,7 +160,8 @@ export default function HomePage({ isLoged, logedFunc }) {
     //ili resetuj ovde ako je moguce da je page: "1" za paramsForGetQoute
     //
     // }, [token, quotes.content, quotes.givenVote, paramsForGetQoute]);
-  }, [token, paramsForGetQoute, tags.length]);
+    console.log("useEffect za qotes eequest parasms POZVANA");
+  }, [token, paramsForGetQoute, tags.length, addedNewQoute]);
   console.log("paramsforgetqoute", paramsForGetQoute);
   console.log("message", message);
   return (
@@ -216,8 +217,11 @@ export default function HomePage({ isLoged, logedFunc }) {
         {/* <TagL tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
         <TagsMui tags={tags} selectTagsFunc={(e) => setParamsForGetQoute(e)} />
         <button onClick={() => setDisplayAddPost("showContent")}>
-          + New Post
+          + New Quote
         </button>
+        <Button size="large" className="newQouteButton button">
+          New Quote
+        </Button>
 
         <button onClick={() => LogOut()}>LogOut</button>
 
@@ -256,6 +260,7 @@ export default function HomePage({ isLoged, logedFunc }) {
             givenVote={el.givenVote}
             updateQuoteFunc={(prev) => setQuotes(prev)}
             addedQouteFuncTrigger={(e) => setAddedNewQoute(e)}
+            alreadyVotedMessagefunc={(e) => setMessage(e)}
           />
         ))}
       </ul>

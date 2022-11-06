@@ -3,6 +3,7 @@ import axios from "axios";
 import LoginPage from "./components/Pages/LoginPage/LoginPage";
 import HomePage from "./components/Pages/HomePage/HomePage";
 import "../src/App.css";
+import Login from "./components/Pages/LoginPage/Login";
 let i = 0;
 
 function App() {
@@ -29,10 +30,11 @@ function App() {
   return (
     <div className="main">
       <div>{errorMessage}</div>
-      <LoginPage
+      {/* <LoginPage
         logedFunc={(e) => setLoged(e)}
         errorFunc={(e) => setErrorMessage(e)}
-      />
+      /> */}
+      <Login logedFunc={(e) => setLoged(e)} />
     </div>
   );
 }
