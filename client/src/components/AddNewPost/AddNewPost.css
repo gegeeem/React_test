@@ -136,3 +136,10 @@
     border: 0;
     background-color: rgba(235, 227, 227, 0.932);
   }
+  .authorLabel{
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .authorLabel:hover{
+    background-color: rgba(235, 227, 227, 0.932);
+  }

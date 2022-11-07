@@ -29,6 +29,7 @@ img {
 }
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     max-width: 80rem;
@@ -47,8 +48,9 @@ img {
 .text-large {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--color-black);
+    color:rgb(83, 77, 88);
 }
+
 .text-normal {
     font-size: 1rem;
     font-weight: 400;
@@ -101,7 +103,7 @@ img {
     text-transform: unset;
     text-rendering: optimizeLegibility;
 }
-.master .wrapper .form .input-submit {
+ .input-submit {
     font-family: inherit;
     font-size: 1rem;
     font-weight: 500;
@@ -120,6 +122,9 @@ img {
     text-rendering: optimizeLegibility;
     margin-left: auto;
     margin-right: auto;
+}
+ .input-submit.disabled {
+background-color: rgb(188, 175, 201);
 }
 .master .wrapper .striped {
     display: flex;
@@ -172,5 +177,22 @@ img {
 }
 .heading{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: 8px;
+    
+}
+
+.error{
+    color: #f44336;
+    font-size: small;
+}
+.headingQoute{
+    font-size:40px;
+    color:rgb(102, 90, 114);
+}
+.clrForQuote{
+    color:rgb(83, 77, 88);
+    font-size: 20px;
 }

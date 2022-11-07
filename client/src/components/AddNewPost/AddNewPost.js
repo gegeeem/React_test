@@ -121,7 +121,7 @@ export default function AddNewPost({
                 value={newPost.content}
                 onFocus={(e) => (e.target.value = "")}
                 type={"textarea"}
-                placeholder="Add some quote here..."
+                placeholder="Quote..."
                 id="content"
                 onChange={(e) =>
                   setNewPost((prev) => {
@@ -133,19 +133,21 @@ export default function AddNewPost({
               />
 
               {/* <label htmlFor="author">Author</label> */}
-              <input
-                className="input-author"
-                value={newPost.author}
-                onFocus={(e) => (e.target.value = "")}
-                placeholder="Author's name..."
-                id="author"
-                onChange={(e) =>
-                  setNewPost((prev) => {
-                    return { ...prev, author: e.target.value };
-                  })
-                }
-                required
-              />
+              <label htmlFor="author" className="authorLabel">
+                <input
+                  className="input-author"
+                  value={newPost.author}
+                  onFocus={(e) => (e.target.value = "")}
+                  placeholder="Author"
+                  id="author"
+                  onChange={(e) =>
+                    setNewPost((prev) => {
+                      return { ...prev, author: e.target.value };
+                    })
+                  }
+                  required
+                />
+              </label>
             </div>
           </div>
           <div>
@@ -157,7 +159,7 @@ export default function AddNewPost({
                 onFocus={(e) => (e.target.value = "")}
                 type={"text"}
                 id="tags"
-                placeholder="tag..."
+                placeholder="Tag..."
                 // onChange={(e) =>
                 //   setNewPost((prev) => {
                 //     return { ...prev, tags: [e.target.value] };
