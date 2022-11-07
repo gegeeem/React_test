@@ -66,7 +66,10 @@ export default function AddNewPost({
           return [...prev, response.data.tags];
         });
 
-        showMessage({ type: "success", text: response.statusText });
+        showMessage({
+          type: "success",
+          text: "Qoute is " + response.statusText,
+        });
         console.log("Response", response);
       })
       .catch((e) => {
@@ -100,9 +103,10 @@ export default function AddNewPost({
         author: "",
         tags: [],
       });
+      setTags([]);
     }
   }, [sendPost]);
-
+  console.log(newPost);
   return (
     <div id="myModal" className={content}>
       <div className="modal-content">
@@ -152,9 +156,8 @@ export default function AddNewPost({
           </div>
           <div>
             <div>
-              <label htmlFor="tags">Add new tags: </label>
-
               <input
+                className="input-tags"
                 value={tag}
                 onFocus={(e) => (e.target.value = "")}
                 type={"text"}
@@ -172,6 +175,7 @@ export default function AddNewPost({
               />
               {tag ? (
                 <input
+                  className="submit-tags"
                   type={"submit"}
                   value={"add"}
                   onClick={(e) => {
@@ -184,8 +188,9 @@ export default function AddNewPost({
                 />
               ) : (
                 <input
-                  type={"submit"}
-                  value={"add"}
+                  className="submit-tags"
+                  type="submit"
+                  value="add"
                   onClick={(e) => {
                     setTags((prev) => {
                       return [...prev, tag];
@@ -196,16 +201,15 @@ export default function AddNewPost({
                   disabled
                 />
               )}
-              <div>
-                {/* {newPost.tags.join()} */}
-                {newPost.tags.map((el, i) => (
-                  <Tag
-                    key={el}
-                    name={el}
-                    removeFunc={() => setTags(removeTag(i, tags))}
-                  />
-                ))}
-              </div>
+
+              {/* {newPost.tags.join()} */}
+              {newPost.tags.map((el, i) => (
+                <Tag
+                  key={el + i}
+                  name={el}
+                  removeFunc={() => setTags(removeTag(i, tags))}
+                />
+              ))}
             </div>
             {newPost.author && newPost.content && newPost.tags.length ? (
               <input

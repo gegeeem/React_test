@@ -39,11 +39,7 @@ export default function Login({ logedFunc }) {
       <div className="container">
         <p className="clrForQuote">
           <sup>
-            <FontAwesomeIcon
-              icon={faQuoteLeftAlt}
-              size={"sm"}
-              color={"rgb(102, 90, 114);"}
-            />
+            <FontAwesomeIcon icon={faQuoteLeftAlt} size={"sm"} />
           </sup>
           <span className="headingQoute">Quotes</span>
           <sub>
@@ -58,13 +54,17 @@ export default function Login({ logedFunc }) {
           <form name="signin" className="form">
             <div className="input-control">
               <input
-                type="email"
+                type="text"
                 id="email"
                 className="input-field"
                 placeholder="Username"
                 onFocus={(e) => {
                   e.target.value = "";
+                  setInputUserPass((prev) => {
+                    return { ...prev, username: "" };
+                  });
                 }}
+                value={inputUserPass.username}
                 onChange={(e) =>
                   setInputUserPass((prev) => {
                     return { ...prev, username: e.target.value };
@@ -83,6 +83,13 @@ export default function Login({ logedFunc }) {
                     return { ...prev, password: e.target.value };
                   })
                 }
+                onFocus={(e) => {
+                  e.target.value = "";
+                  setInputUserPass((prev) => {
+                    return { ...prev, password: "" };
+                  });
+                }}
+                value={inputUserPass.password}
               />
             </div>
             <div className="input-control">
@@ -93,7 +100,7 @@ export default function Login({ logedFunc }) {
                   value="Sign In"
                   onClick={(e) => {
                     LogIn(inputUserPass);
-                    setInputUserPass({ username: "", password: "" });
+                    // setInputUserPass({ username: "", password: "" });
                     e.preventDefault();
                   }}
                 />

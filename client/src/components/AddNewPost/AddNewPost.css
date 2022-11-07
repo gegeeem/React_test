@@ -93,7 +93,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color:rgb(255, 255, 255);
+    background-color:rgb(233, 231, 231);
     color: rgb(102, 90, 114);
   
    
@@ -142,4 +142,42 @@
   }
   .authorLabel:hover{
     background-color: rgba(235, 227, 227, 0.932);
+  }
+
+  .input-tags{
+    display: inline-block;
+    border: 0;
+    outline: 0;
+    background-color:  rgba(206, 203, 203, 0.932);;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 3px;
+    min-height: 30px;
+    font-size: medium;
+    text-align: left;
+    color: rgb(94, 92, 92);
+    align-self: flex-end;
+    font-family: 'Roboto', sans-serif, Bold;
+  }
+  .input-tags:focus, .input-tags:hover{
+    outline: 0;
+    border: 0;
+    background-color: rgba(235, 227, 227, 0.932);
+    
+    
+  }
+  .submit-tags, .submit-tags:focus{
+    border: 0;
+    outline: 0;
+    background-color: rgb(137, 124, 151);
+    border-radius: 5px;
+    padding: 8px;
+    margin: 3px;
+    
+    min-height: 30px;
+    font-size: medium;
+    color: aliceblue;
+  }
+  .submit-tags:hover{
+    background-color: rgb(154, 148, 160);
   }

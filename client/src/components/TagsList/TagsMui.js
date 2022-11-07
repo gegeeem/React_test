@@ -7,6 +7,32 @@ import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import { useEffect } from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { FilledInput, Input, TextField } from "@mui/material";
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#403354",
+    },
+    secondary: {
+      main: "#604f54",
+      light: "#984661",
+    },
+  },
+  root: {
+    "& $notchedOutline": {
+      borderWidth: 0,
+    },
+    "&:hover $notchedOutline": {
+      borderWidth: 0,
+    },
+    "&$focused $notchedOutline": {
+      borderWidth: 0,
+    },
+  },
+  focused: {},
+  notchedOutline: {},
+});
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -58,26 +84,29 @@ export default function TagsMui({ tags, selectTagsFunc }) {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 200 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
-        <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
-          renderValue={(selected) => selected.join(", ")}
-          MenuProps={MenuProps}
-        >
-          {tags.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText primary={name} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <ThemeProvider theme={theme}>
+        <FormControl sx={{ m: 1, width: 200 }}>
+          <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+          <Select
+            labelId="demo-multiple-checkbox-label"
+            id="demo-multiple-checkbox"
+            multiple
+            value={personName}
+            onChange={handleChange}
+            input={<FilledInput label="tag" />}
+            // input={<TextField variant="standard" label="Tag" />}
+            renderValue={(selected) => selected.join(", ")}
+            MenuProps={MenuProps}
+          >
+            {tags.map((name) => (
+              <MenuItem key={name} value={name}>
+                <Checkbox checked={personName.indexOf(name) > -1} />
+                <ListItemText primary={name} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </ThemeProvider>
     </div>
   );
 }

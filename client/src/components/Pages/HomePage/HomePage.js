@@ -166,17 +166,18 @@ export default function HomePage({ isLoged, logedFunc }) {
   console.log("message", message);
   return (
     <div className="main-container">
-      <div className="menu">
-        <AscDesc
-          label={"Direction"}
-          defaulValue={["asc", "desc"]}
-          changeDirectionFunc={(val) =>
-            setParamsForGetQoute((prev) => {
-              return { ...prev, sortDirection: val, page: "1" };
-            })
-          }
-        />
-        {/* <select
+      <div className="main-listOfQuotes-cntnt">
+        <div className="menu">
+          <AscDesc
+            label={"Direction"}
+            defaulValue={["asc", "desc"]}
+            changeDirectionFunc={(val) =>
+              setParamsForGetQoute((prev) => {
+                return { ...prev, sortDirection: val, page: "1" };
+              })
+            }
+          />
+          {/* <select
           className="ascDesc"
           defaultValue={paramsForGetQoute.sortDirection}
           onChange={(e) =>
@@ -192,16 +193,16 @@ export default function HomePage({ isLoged, logedFunc }) {
             DESC
           </option>
         </select> */}
-        <AscDesc
-          label={"Sorted By"}
-          defaulValue={["createdAt", "author", "upvotesCount"]}
-          changeDirectionFunc={(val) => {
-            setParamsForGetQoute((prev) => {
-              return { ...prev, sortBy: val, page: "1" };
-            });
-          }}
-        />
-        {/* <select
+          <AscDesc
+            label={"Sorted By"}
+            defaulValue={["createdAt", "author", "upvotesCount"]}
+            changeDirectionFunc={(val) => {
+              setParamsForGetQoute((prev) => {
+                return { ...prev, sortBy: val, page: "1" };
+              });
+            }}
+          />
+          {/* <select
           onChange={(e) => {
             setParamsForGetQoute((prev) => {
               return { ...prev, sortBy: e.target.value };
@@ -213,66 +214,73 @@ export default function HomePage({ isLoged, logedFunc }) {
           <option value={"author"}>Author</option>
           <option value={"upvotesCount"}>Upvotes Count</option>
         </select> */}
-        {/* <TagsList tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
-        {/* <TagL tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
-        <TagsMui tags={tags} selectTagsFunc={(e) => setParamsForGetQoute(e)} />
-        <button onClick={() => setDisplayAddPost("showContent")}>
-          + New Quote
-        </button>
-        <Button size="large" className="newQouteButton button">
-          New Quote
-        </Button>
+          {/* <TagsList tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
+          {/* <TagL tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
+          <TagsMui
+            tags={tags}
+            selectTagsFunc={(e) => setParamsForGetQoute(e)}
+          />
+          <button onClick={() => setDisplayAddPost("showContent")}>
+            + New Quote
+          </button>
+          <Button size="large" className="newQouteButton button">
+            New Quote
+          </Button>
 
-        <button onClick={() => LogOut()}>LogOut</button>
+          <button onClick={() => LogOut()}>LogOut</button>
 
-        {/* <SearchTags tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
+          {/* <SearchTags tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
 
-        {/* <MultipleSelectCheckmarks /> */}
-      </div>
-      broj postova {numberOfQoutes}
-      <AddNewPost
-        display={displayAddPost}
-        closeFunc={() => setDisplayAddPost("hideContent")}
-        addNewQouteFunc={(qoutes) => setQuotes(qoutes)}
-        addNewQouteTagFunc={(tags) => setTags(tags)}
-        showMessage={(val) => setMessage(val)}
-      />
-      <PopUpMessage
-        typeOfMessage={message.type}
-        message={message.text}
-        messageFuncSetUp={(val) => setMessage(val)}
-      />
-      <ul className="listOfQoutes">
-        {/* {quotes?.map((el) => (
+          {/* <MultipleSelectCheckmarks /> */}
+        </div>
+        <h2 className="headingQuote">Total number of Quotes <span>{numberOfQoutes}</span></h2>
+        <AddNewPost
+          display={displayAddPost}
+          closeFunc={() => setDisplayAddPost("hideContent")}
+          addNewQouteFunc={(qoutes) => setQuotes(qoutes)}
+          addNewQouteTagFunc={(tags) => setTags(tags)}
+          showMessage={(val) => setMessage(val)}
+        />
+        <PopUpMessage
+          typeOfMessage={message.type}
+          message={message.text}
+          messageFuncSetUp={(val) => setMessage(val)}
+        />
+        <ul className="listOfQoutes">
+          {/* {quotes?.map((el) => (
           <li key={el.id}>
             {el.content} upvote {el.downvotesCount}
           </li>
         ))} */}
 
-        {quotes?.map((el) => (
-          <Quote
-            key={el.id}
-            id={el.id}
-            author={el.author}
-            content={el.content}
-            upvotesCount={el.upvotesCount}
-            downvotesCount={el.downvotesCount}
-            givenVote={el.givenVote}
-            updateQuoteFunc={(prev) => setQuotes(prev)}
-            addedQouteFuncTrigger={(e) => setAddedNewQoute(e)}
-            alreadyVotedMessagefunc={(e) => setMessage(e)}
-          />
-        ))}
-      </ul>
-      <PaginationFor
-        currPage={+paramsForGetQoute.page}
-        numberOfPage={Math.ceil(numberOfQoutes / 5)}
-        selectPageFunc={(val) =>
-          setParamsForGetQoute((prev) => {
-            return { ...prev, page: val };
-          })
-        }
-      />
+          {quotes?.map((el) => (
+            <Quote
+              key={el.id}
+              id={el.id}
+              author={el.author}
+              content={el.content}
+              upvotesCount={el.upvotesCount}
+              downvotesCount={el.downvotesCount}
+              givenVote={el.givenVote}
+              updateQuoteFunc={(prev) => setQuotes(prev)}
+              addedQouteFuncTrigger={(e) => setAddedNewQoute(e)}
+              alreadyVotedMessagefunc={(e) => setMessage(e)}
+            />
+          ))}
+        </ul>
+      </div>
+
+      <div className="pagination">
+        <PaginationFor
+          currPage={+paramsForGetQoute.page}
+          numberOfPage={Math.ceil(numberOfQoutes / 5)}
+          selectPageFunc={(val) =>
+            setParamsForGetQoute((prev) => {
+              return { ...prev, page: val };
+            })
+          }
+        />
+      </div>
       {/* <button
         onClick={(e) => {
           // setParamsForGetQoute((prev) => {

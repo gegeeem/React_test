@@ -5,9 +5,12 @@
 .show{
 display: block;
 position: fixed; /* Stay in place */
+min-width: 250px;
+height: 50px;
+text-align: center;
 z-index: 2; /* Sit on top */
-right:50vw;
-top: 0;
+right:0px;
+top: 50px;
 background-color: aliceblue;
 -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
@@ -16,11 +19,11 @@ background-color: aliceblue;
 }
 
 @-webkit-keyframes animatetop {
-    from {top:-30px; opacity:0} 
-    to {top:0; opacity:1}
+    from {right:-250px; opacity:0} 
+    to {right:0px; opacity:1}
   }
   
   @keyframes animatetop {
-    from {top:-30px; opacity:0}
-    to {top:0; opacity:1}
+    from {right:-250px; opacity:0} 
+    to {right:0px; opacity:1}
   }
