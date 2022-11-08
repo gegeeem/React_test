@@ -9,21 +9,21 @@ min-width: 250px;
 height: 50px;
 text-align: center;
 z-index: 2; /* Sit on top */
-right:0px;
+left:0px;
 top: 50px;
 background-color: aliceblue;
--webkit-animation-name: animatetop;
+-webkit-animation-name:  animateMessage;
     -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
+    animation-name:  animateMessage;
     animation-duration: 0.4s
 }
 
-@-webkit-keyframes animatetop {
-    from {right:-250px; opacity:0} 
-    to {right:0px; opacity:1}
+@-webkit-keyframes animateMessage {
+    from {left:-250px; opacity:0} 
+    to {left:0px; opacity:1}
   }
   
-  @keyframes animatetop {
-    from {right:-250px; opacity:0} 
-    to {right:0px; opacity:1}
+  @keyframes animateMessage {
+    from {left:-250px; opacity:0} 
+    to {left:0px; opacity:1}
   }

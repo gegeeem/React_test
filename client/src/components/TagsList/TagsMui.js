@@ -11,27 +11,19 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { FilledInput, Input, TextField } from "@mui/material";
 const theme = createTheme({
   palette: {
+    type: "light",
     primary: {
-      main: "#403354",
+      main: "#260d4a",
     },
     secondary: {
-      main: "#604f54",
-      light: "#984661",
+      main: "#583c64",
+    },
+    text: {
+      primary: "rgba(12,1,22,0.87)",
+      secondary: "rgba(16,1,43,0.54)",
+      hint: 'rgba(19,5,47,0.38)',
     },
   },
-  root: {
-    "& $notchedOutline": {
-      borderWidth: 0,
-    },
-    "&:hover $notchedOutline": {
-      borderWidth: 0,
-    },
-    "&$focused $notchedOutline": {
-      borderWidth: 0,
-    },
-  },
-  focused: {},
-  notchedOutline: {},
 });
 
 const ITEM_HEIGHT = 48;
@@ -93,7 +85,7 @@ export default function TagsMui({ tags, selectTagsFunc }) {
             multiple
             value={personName}
             onChange={handleChange}
-            input={<FilledInput label="tag" />}
+            input={<OutlinedInput label="tag" />}
             // input={<TextField variant="standard" label="Tag" />}
             renderValue={(selected) => selected.join(", ")}
             MenuProps={MenuProps}

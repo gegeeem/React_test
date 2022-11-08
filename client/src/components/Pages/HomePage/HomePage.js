@@ -13,8 +13,13 @@ import Pagination from "../../Pagination/Pagination";
 import PaginationFor from "../../Pagination/Pagination";
 import PopUpMessage from "../../PopUpMessage/PopUpMessage";
 import { Button } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faQuoteLeftAlt,
+  faQuoteRightAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import Login from "../LoginPage/Login";
 
-let counter = 1;
 export default function HomePage({ isLoged, logedFunc }) {
   const [addedNewQoute, setAddedNewQoute] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -65,6 +70,14 @@ export default function HomePage({ isLoged, logedFunc }) {
   //   console.log("message", message);
   // }, [message]);
 
+  ///isLoged User
+  useEffect(() => {
+    if (!tok1) {
+      logedFunc(false);
+    }
+  }, [tok1]);
+
+  //
   useEffect(() => {
     setParamsForGetQoute((prev) => {
       return { ...prev, page: pageStep.toString() };
@@ -164,10 +177,20 @@ export default function HomePage({ isLoged, logedFunc }) {
   }, [token, paramsForGetQoute, tags.length, addedNewQoute]);
   console.log("paramsforgetqoute", paramsForGetQoute);
   console.log("message", message);
+
   return (
     <div className="main-container">
       <div className="main-listOfQuotes-cntnt">
         <div className="menu">
+          <div className="logo">
+            <sup>
+              <FontAwesomeIcon icon={faQuoteLeftAlt} size={"sm"} />
+            </sup>
+            <span className="headingQoute">Quotes</span>
+            <sub>
+              <FontAwesomeIcon icon={faQuoteRightAlt} size={"sm"} />
+            </sub>
+          </div>
           <AscDesc
             label={"Direction"}
             defaulValue={["asc", "desc"]}
@@ -178,21 +201,21 @@ export default function HomePage({ isLoged, logedFunc }) {
             }
           />
           {/* <select
-          className="ascDesc"
-          defaultValue={paramsForGetQoute.sortDirection}
-          onChange={(e) =>
-            setParamsForGetQoute((prev) => {
-              return { ...prev, sortDirection: e.target.value };
-            })
-          }
-        >
-          <option className="optAscDesc" value={"asc"}>
-            ASC
-          </option>
-          <option className="optAscDesc" value={"desc"}>
-            DESC
-          </option>
-        </select> */}
+            className="ascDesc"
+            defaultValue={paramsForGetQoute.sortDirection}
+            onChange={(e) =>
+              setParamsForGetQoute((prev) => {
+                return { ...prev, sortDirection: e.target.value };
+              })
+            }
+          >
+            <option className="optAscDesc" value={"asc"}>
+              ASC
+            </option>
+            <option className="optAscDesc" value={"desc"}>
+              DESC
+            </option>
+          </select> */}
           <AscDesc
             label={"Sorted By"}
             defaulValue={["createdAt", "author", "upvotesCount"]}
@@ -203,37 +226,41 @@ export default function HomePage({ isLoged, logedFunc }) {
             }}
           />
           {/* <select
-          onChange={(e) => {
-            setParamsForGetQoute((prev) => {
-              return { ...prev, sortBy: e.target.value };
-            });
-          }}
-          defaultValue={paramsForGetQoute.sortBy}
-        >
-          <option value={"createdAt"}>Created At</option>
-          <option value={"author"}>Author</option>
-          <option value={"upvotesCount"}>Upvotes Count</option>
-        </select> */}
+            onChange={(e) => {
+              setParamsForGetQoute((prev) => {
+                return { ...prev, sortBy: e.target.value };
+              });
+            }}
+            defaultValue={paramsForGetQoute.sortBy}
+          >
+            <option value={"createdAt"}>Created At</option>
+            <option value={"author"}>Author</option>
+            <option value={"upvotesCount"}>Upvotes Count</option>
+          </select> */}
           {/* <TagsList tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
           {/* <TagL tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
           <TagsMui
             tags={tags}
             selectTagsFunc={(e) => setParamsForGetQoute(e)}
           />
-          <button onClick={() => setDisplayAddPost("showContent")}>
-            + New Quote
-          </button>
-          <Button size="large" className="newQouteButton button">
+          <button
+            className="linkButton"
+            onClick={() => setDisplayAddPost("showContent")}
+          >
             New Quote
-          </Button>
+          </button>
 
-          <button onClick={() => LogOut()}>LogOut</button>
+          <button className="linkButton" onClick={() => LogOut()}>
+            LogOut
+          </button>
 
           {/* <SearchTags tags={tags} checkingTags={(e) => setParamsForGetQoute(e)} /> */}
 
           {/* <MultipleSelectCheckmarks /> */}
         </div>
-        <h2 className="headingQuote">Total number of Quotes <span>{numberOfQoutes}</span></h2>
+        <h2 className="headingQuote">
+          Total number of Quotes <span>{numberOfQoutes}</span>
+        </h2>
         <AddNewPost
           display={displayAddPost}
           closeFunc={() => setDisplayAddPost("hideContent")}
@@ -248,10 +275,10 @@ export default function HomePage({ isLoged, logedFunc }) {
         />
         <ul className="listOfQoutes">
           {/* {quotes?.map((el) => (
-          <li key={el.id}>
-            {el.content} upvote {el.downvotesCount}
-          </li>
-        ))} */}
+            <li key={el.id}>
+              {el.content} upvote {el.downvotesCount}
+            </li>
+          ))} */}
 
           {quotes?.map((el) => (
             <Quote
@@ -282,17 +309,17 @@ export default function HomePage({ isLoged, logedFunc }) {
         />
       </div>
       {/* <button
-        onClick={(e) => {
-          // setParamsForGetQoute((prev) => {
-          //   return { ...prev, page: (counter++).toString() };
-          // });
-          const a = pageStep + 1;
-          setPageStep(a);
-          e.preventDefault();
-        }}
-      >
-        Next
-      </button> */}
+          onClick={(e) => {
+            // setParamsForGetQoute((prev) => {
+            //   return { ...prev, page: (counter++).toString() };
+            // });
+            const a = pageStep + 1;
+            setPageStep(a);
+            e.preventDefault();
+          }}
+        >
+          Next
+        </button> */}
     </div>
   );
 }

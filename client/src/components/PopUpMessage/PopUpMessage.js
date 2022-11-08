@@ -3,6 +3,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import "./PopUpMessage.css";
 import { useEffect, useState } from "react";
+import Progres from "../Progres/Progres";
 
 const typeOfPops = ["error", "warning", "info", "success"];
 export default function PopUpMessage({
@@ -34,6 +35,7 @@ export default function PopUpMessage({
           {message}
         </Alert>
       </Stack>
+      <Progres />
     </div>
   );
 }

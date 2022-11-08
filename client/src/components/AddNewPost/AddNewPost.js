@@ -213,6 +213,7 @@ export default function AddNewPost({
             </div>
             {newPost.author && newPost.content && newPost.tags.length ? (
               <input
+                className="addNewQuoteSubmit"
                 type="submit"
                 onClick={(e) => {
                   setSendPost(newPost);
@@ -224,6 +225,7 @@ export default function AddNewPost({
               />
             ) : (
               <input
+                className="addNewQuoteSubmit"
                 type="submit"
                 onClick={(e) => {
                   setSendPost(newPost);

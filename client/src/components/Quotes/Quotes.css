@@ -14,7 +14,7 @@
 
 .numberOfVotes{
     padding: 5px;
-    flex: 30% 1 auto;
+   
    
 }
 
@@ -39,7 +39,7 @@
     color: rgb(102, 90, 114);
     padding: 8px;
    
-    flex: 1 1 auto;
+    flex: 0 1 88%;
     border-radius: 5px;
 
 }
@@ -50,10 +50,12 @@
 }
 
 .vote{
+    flex: 1 0 12%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
     
 
 }

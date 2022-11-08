@@ -22,12 +22,12 @@
   /* Modal Content */
   .modal-content {
     position: relative;
-    background-color: #fefefe;
+    background-color:rgb(245, 246, 248);;
     margin: auto;
     padding: 0;
     border: 1px solid #888;
     border-radius: 8px;
-    width: 80%;
+    width: 70%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
@@ -93,7 +93,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color:rgb(233, 231, 231);
+    background-color: rgb(244, 244, 247);
     color: rgb(102, 90, 114);
   
    
@@ -112,11 +112,15 @@
     padding: 8px;
     font-size:large;
     font-family: 'Roboto', sans-serif, Bold;
+    background-color: rgb(244, 244, 247);
+    color: rgb(81, 70, 83);
   }
   .textarea-post:hover, textarea:focus{
-    outline: 0;
-    border: 0;
-    background-color: rgba(235, 227, 227, 0.932);
+    outline: 1px solid rgb(212, 212, 212);
+  
+    background-color: rgb(254, 254, 255);
+    /* border: 1px solid rgb(212, 212, 212); */
+   
    
   }
   .input-author{
@@ -130,18 +134,22 @@
     text-align: left;
     align-self: flex-end;
     font-family: 'Roboto', sans-serif, Bold;
+    background-color: rgb(244, 244, 247);
+    color: rgb(81, 70, 83);
   }
   .input-author:focus, .input-author:hover{
     outline: 0;
     border: 0;
-    background-color: rgba(235, 227, 227, 0.932);
+    background-color: rgb(255, 255, 255);
   }
   .authorLabel{
     display: flex;
     flex-direction: row-reverse;
+    background-color: rgb(244, 244, 247);
   }
-  .authorLabel:hover{
-    background-color: rgba(235, 227, 227, 0.932);
+  .authorLabel:hover, .authorLabel:focus{
+    background-color: rgb(255, 255, 255);
+    outline: 1px solid rgb(212, 212, 212);
   }
 
   .input-tags{
@@ -180,4 +188,19 @@
   }
   .submit-tags:hover{
     background-color: rgb(154, 148, 160);
+  }
+  .addNewQuoteSubmit{
+    display: block;
+    border: 0;
+    outline: 0;
+    background-color: rgb(137, 124, 151);
+    border-radius: 5px;
+    padding: 8px 80px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    min-height: 30px;
+    font-size: medium;
+    color: aliceblue;
   }

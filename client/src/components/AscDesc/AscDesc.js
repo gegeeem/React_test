@@ -7,12 +7,19 @@ import Select from "@mui/material/Select";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
+    type: "light",
     primary: {
-      main: "#403354",
+      main: "#260d4a",
     },
     secondary: {
-      main: "#604f54",
-      light: "#984661",
+      main: "#583c64",
+    },
+    default: {
+      main: "#260d4a",
+    },
+    text: {
+      primary: "rgba(12,1,22,0.87)",
+      secondary: "rgba(16,1,43,0.54)",
     },
   },
 });
@@ -28,7 +35,7 @@ export default function AscDesc({ label, defaulValue, changeDirectionFunc }) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ minWidth: 120 }}>
-        <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="demo-simple-select-label">{label}</InputLabel>
           <Select
             labelId="demo-simple-select-label"

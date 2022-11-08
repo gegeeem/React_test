@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import HSLToRGB from "../../HSL to RGB/HslToRgb";
+import Progres from "../Progres/Progres";
 
 // import upVoteForPost from "../../gettingRequest/upVoteForPost";
 
@@ -88,6 +89,7 @@ export default function Quote({
         // };
         console.log("voted response", res);
         addedQouteFuncTrigger((prev) => !prev);
+        <Progres trigger="progresContainer-display" />;
         // addedQouteFuncTrigger(true);
       })
       .catch((err) => {

@@ -29,8 +29,10 @@ function App() {
   useEffect(() => {
     if (valueOfTokenInLocal) {
       setLoged(valueOfTokenInLocal);
+    } else {
+      setLoged(false);
     }
-  }, [loged]);
+  }, [valueOfTokenInLocal]);
   if (valueOfTokenInLocal) {
     return (
       <div className="main">
