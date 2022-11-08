@@ -24,12 +24,10 @@ export default function Login({ logedFunc }) {
         logedFunc(response.data.accessToken);
         setErrorMessage(`poruka sa logina`);
         setInputUserPass({ username: "", password: "" });
-        // errorFunc(errorMessage);
       })
       .catch((e) => {
-        console.log("grska?", e);
+       
         setErrorMessage("Wrong Username or Password! Please try again");
-        // errorFunc(errorMessage);
         setInputUserPass({ username: "", password: "" });
       });
   }
@@ -100,7 +98,6 @@ export default function Login({ logedFunc }) {
                   value="Sign In"
                   onClick={(e) => {
                     LogIn(inputUserPass);
-                    // setInputUserPass({ username: "", password: "" });
                     e.preventDefault();
                   }}
                 />

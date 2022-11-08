@@ -6,8 +6,6 @@ import axios from "axios";
 import HSLToRGB from "../../HSL to RGB/HslToRgb";
 import Progres from "../Progres/Progres";
 
-// import upVoteForPost from "../../gettingRequest/upVoteForPost";
-
 export default function Quote({
   id,
   author,
@@ -18,7 +16,7 @@ export default function Quote({
   updateQuoteFunc,
   addedQouteFuncTrigger,
   alreadyVotedMessagefunc,
-  spinnerFunc
+  spinnerFunc,
 }) {
   const [votedAnime, setVotedAnime] = useState(false);
   function startVoteAnitamtion() {
@@ -40,24 +38,7 @@ export default function Quote({
       return 100;
     }
   };
-  // const colorForPercentage = (percentage, upVote, downVote) => {
-  //   if (upVote > 0 && downVote > 0) {
-  //     if (percentage <= 41) {
-  //       return "procentOfGrades red";
-  //     } else if (percentage <= 81) {
-  //       return "procentOfGrades orange";
-  //     } else {
-  //       return "procentOfGrades green";
-  //     }
-  //   }
-  //   if (percentage === 0) {
-  //     return "procentOfGrades";
-  //   } else if (upVote > 0 && downVote === 0) {
-  //     return "procentOfGrades green";
-  //   } else if (upVote === 0 && downVote > 0) {
-  //     return "procentOfGrades red";
-  //   }
-  // };
+
   function clrByPercentage(percentage, upVote, downVote) {
     if (percentage === 0) {
       return "rgb(245, 246, 248)";
@@ -71,33 +52,56 @@ export default function Quote({
       return HSLToRGB(gradesPercentage(upvotesCount, downvotesCount), 98, 50);
     }
   }
-  function upVoteForPost(id, action, method, funcVote) {
+  function upVoteForPost(id, action, method) {
     const token = localStorage.getItem("token");
 
     axios({
       method: method,
       url: `http://localhost:8000/quotes/${id}/${action}`,
-
-      // params: { id: "147dc7ad-e752-4f7c-9d4d-1bf41153001e" },
       headers: {
         Authorization: "Bearer " + token,
       },
     })
       .then((res) => {
-        // alert("uspesno ste glasali");
-        // const a = () => {
-        //   funcVote = "success";
-        // };
-        console.log("voted response", res);
         addedQouteFuncTrigger((prev) => !prev);
         spinnerFunc("display");
-       
-        // addedQouteFuncTrigger(true);
       })
       .catch((err) => {
-        funcVote = "error";
         alert(err);
       });
+  }
+
+  // upvote or delete downvoted
+  function upvoteOrDeleteDownvote() {
+    if (givenVote === "none") {
+      upVoteForPost(id, "upvote", "post");
+
+      startVoteAnitamtion();
+    } else if (givenVote === "downvote") {
+      upVoteForPost(id, "downvote", "delete");
+    } else {
+      alreadyVotedMessagefunc({
+        type: "info",
+        text: "Already Upvoted",
+      });
+    }
+  }
+
+  // downvote or delete upvote
+  function downvoteOrDeleteUpvote() {
+    if (givenVote === "none") {
+      upVoteForPost(id, "downvote", "post");
+     
+      startVoteAnitamtion();
+    } else if (givenVote === "upvote") {
+      upVoteForPost(id, "upvote", "delete");
+      
+    } else {
+      alreadyVotedMessagefunc({
+        type: "info",
+        text: "Already Downvoted",
+      });
+    }
   }
   return (
     <div className="container-qoute">
@@ -108,52 +112,11 @@ export default function Quote({
           beatFade={givenVote === "upvote" && votedAnime}
           color={givenVote !== "upvote" ? "rgb(55, 47, 63)" : ""}
           onClick={() => {
-            let message = "";
-            if (givenVote === "none") {
-              upVoteForPost(id, "upvote", "post", message);
-              //if upVoteForPost(id, "upvote", "post"); vote if note message
-              updateQuoteFunc((prev) => {
-                return prev.map((el) => {
-                  if (el.id === id) {
-                    return {
-                      ...el,
-                      givenVote: "upvote",
-                      upvotesCount: el.upvotesCount + 1,
-                    };
-                  } else return el;
-                });
-              });
-
-              startVoteAnitamtion();
-            } else if (givenVote === "downvote") {
-              upVoteForPost(id, "downvote", "delete");
-              updateQuoteFunc((prev) => {
-                return prev.map((el) => {
-                  if (el.id === id) {
-                    return {
-                      ...el,
-                      givenVote: "none",
-                      downvotesCount: el.downvotesCount - 1,
-                    };
-                  } else return el;
-                });
-              });
-            } else {
-              // alert("Already upvoted!");
-              alreadyVotedMessagefunc({
-                type: "info",
-                text: "Already Upvoted",
-              });
-            }
+            upvoteOrDeleteDownvote();
           }}
         />
 
         <div
-          // className={colorForPercentage(
-          //   gradesPercentage(upvotesCount, downvotesCount),
-          //   upvotesCount,
-          //   downvotesCount
-          // )}
           className="procentOfGrades"
           style={{
             color: clrByPercentage(
@@ -174,40 +137,7 @@ export default function Quote({
           beatFade={givenVote === "downvote" && votedAnime}
           color={givenVote !== "downvote" ? "rgb(55, 47, 63)" : ""}
           onClick={() => {
-            if (givenVote === "none") {
-              upVoteForPost(id, "downvote", "post");
-              updateQuoteFunc((prev) => {
-                return prev.map((el) => {
-                  if (el.id === id) {
-                    return {
-                      ...el,
-                      givenVote: "downvote",
-                      downvotesCount: el.downvotesCount + 1,
-                    };
-                  } else return el;
-                });
-              });
-              startVoteAnitamtion();
-            } else if (givenVote === "upvote") {
-              upVoteForPost(id, "upvote", "delete");
-              updateQuoteFunc((prev) => {
-                return prev.map((el) => {
-                  if (el.id === id) {
-                    return {
-                      ...el,
-                      givenVote: "none",
-                      upvotesCount: el.upvotesCount - 1,
-                    };
-                  } else return el;
-                });
-              });
-            } else {
-              // alert("Already upvoted!");
-              alreadyVotedMessagefunc({
-                type: "info",
-                text: "Already Downvoted",
-              });
-            }
+            downvoteOrDeleteUpvote();
           }}
         />
       </div>

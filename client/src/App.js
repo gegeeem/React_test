@@ -5,25 +5,13 @@ import HomePage from "./components/Pages/HomePage/HomePage";
 import "../src/App.css";
 import Login from "./components/Pages/LoginPage/Login";
 
-// export const themeOptions: ThemeOptions = {
-//   palette: {
-//     type: "light",
-//     primary: {
-//       main: "#403354",
-//     },
-//     secondary: {
-//       main: "#604f54",
-//       light: "#984661",
-//     },
-//   },
-// };
+
 
 function App() {
   const [loged, setLoged] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  // console.log("loged: ", loged);
-  // console.log("errorMessage: ", errorMessage);
-  console.log("API FJA POZvana");
+  
+  
   const valueOfTokenInLocal = localStorage.getItem("token");
 
   useEffect(() => {

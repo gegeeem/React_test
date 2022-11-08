@@ -70,7 +70,6 @@ export default function AddNewPost({
           type: "success",
           text: "Qoute is " + response.statusText,
         });
-        console.log("Response", response);
       })
       .catch((e) => {
         setSendPost({
@@ -85,7 +84,7 @@ export default function AddNewPost({
         });
         setTag("");
         setTags([]);
-        console.log(e.response.data);
+
         showMessage({ type: "warning", text: e.response.data.author });
         alert(e);
       });
@@ -106,7 +105,7 @@ export default function AddNewPost({
       setTags([]);
     }
   }, [sendPost]);
-  console.log(newPost);
+
   return (
     <div id="myModal" className={content}>
       <div className="modal-content">
@@ -119,7 +118,6 @@ export default function AddNewPost({
         <div className="modal-body">
           <div className="form">
             <div className="qoute-container">
-              {/* <label htmlFor="content">Content</label> */}
               <textarea
                 className="textarea-post"
                 value={newPost.content}
@@ -136,7 +134,6 @@ export default function AddNewPost({
                 required
               />
 
-              {/* <label htmlFor="author">Author</label> */}
               <label htmlFor="author" className="authorLabel">
                 <input
                   className="input-author"
@@ -163,11 +160,6 @@ export default function AddNewPost({
                 type={"text"}
                 id="tags"
                 placeholder="Tag..."
-                // onChange={(e) =>
-                //   setNewPost((prev) => {
-                //     return { ...prev, tags: [e.target.value] };
-                //   })
-                // }
                 onChange={(e) => {
                   setTag(e.target.value);
                 }}
@@ -202,7 +194,6 @@ export default function AddNewPost({
                 />
               )}
 
-              {/* {newPost.tags.join()} */}
               {newPost.tags.map((el, i) => (
                 <Tag
                   key={el + i}
@@ -217,8 +208,6 @@ export default function AddNewPost({
                 type="submit"
                 onClick={(e) => {
                   setSendPost(newPost);
-                  // addPostRequest(newPost);
-                  // e.preventDefault();
 
                   closeFunc();
                 }}
@@ -229,8 +218,6 @@ export default function AddNewPost({
                 type="submit"
                 onClick={(e) => {
                   setSendPost(newPost);
-                  // addPostRequest(newPost);
-                  // e.preventDefault();
 
                   closeFunc();
                 }}
@@ -239,9 +226,6 @@ export default function AddNewPost({
             )}
           </div>
         </div>
-        {/* <div className="modal-footer">
-          <h4>Qoutes</h4>
-        </div> */}
       </div>
     </div>
   );

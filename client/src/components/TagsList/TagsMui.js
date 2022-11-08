@@ -8,7 +8,6 @@ import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import { useEffect } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { FilledInput, Input, TextField } from "@mui/material";
 const theme = createTheme({
   palette: {
     type: "light",
@@ -21,7 +20,7 @@ const theme = createTheme({
     text: {
       primary: "rgba(12,1,22,0.87)",
       secondary: "rgba(16,1,43,0.54)",
-      hint: 'rgba(19,5,47,0.38)',
+      hint: "rgba(19,5,47,0.38)",
     },
   },
 });
@@ -36,19 +35,6 @@ const MenuProps = {
     },
   },
 };
-
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
 
 export default function TagsMui({ tags, selectTagsFunc }) {
   const [personName, setPersonName] = React.useState([]);
@@ -86,7 +72,6 @@ export default function TagsMui({ tags, selectTagsFunc }) {
             value={personName}
             onChange={handleChange}
             input={<OutlinedInput label="tag" />}
-            // input={<TextField variant="standard" label="Tag" />}
             renderValue={(selected) => selected.join(", ")}
             MenuProps={MenuProps}
           >

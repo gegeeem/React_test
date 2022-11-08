@@ -15,11 +15,6 @@ export default function PaginationFor({
     setPage(value);
     selectPageFunc(value);
   };
-  //   useEffect(() => {
-  //     if (page !== currPage) {
-  //       setPage(currPage);
-  //     }
-  //   }, [currPage]);
   return (
     <Stack spacing={2}>
       <Pagination

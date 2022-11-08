@@ -15,9 +15,7 @@ export default function PopUpMessage({
   useEffect(() => {
     function PopMessage() {
       setDisplayMessage("show");
-      // setTimeout(2000);
-      // setMessage("");
-      // setDisplayMessage("pop");
+      
       const timer = setTimeout(() => {
         setDisplayMessage("pop");
         messageFuncSetUp({ type: "success", text: "" });
