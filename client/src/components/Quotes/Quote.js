@@ -18,6 +18,7 @@ export default function Quote({
   updateQuoteFunc,
   addedQouteFuncTrigger,
   alreadyVotedMessagefunc,
+  spinnerFunc
 }) {
   const [votedAnime, setVotedAnime] = useState(false);
   function startVoteAnitamtion() {
@@ -89,7 +90,8 @@ export default function Quote({
         // };
         console.log("voted response", res);
         addedQouteFuncTrigger((prev) => !prev);
-        <Progres trigger="progresContainer-display" />;
+        spinnerFunc("display");
+       
         // addedQouteFuncTrigger(true);
       })
       .catch((err) => {

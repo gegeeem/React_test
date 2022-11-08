@@ -19,6 +19,8 @@ import {
   faQuoteRightAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import Login from "../LoginPage/Login";
+import Progres from "../../Progres/Progres";
+import Menu from "../../Menu/Menu";
 
 export default function HomePage({ isLoged, logedFunc }) {
   const [addedNewQoute, setAddedNewQoute] = useState(false);
@@ -42,6 +44,7 @@ export default function HomePage({ isLoged, logedFunc }) {
     text: "",
   });
   const [displayMessage, setDisplayMessage] = useState("pop"); // for clasname dipla block
+  const [spinner, setSpinner] = useState(false);
 
   const tok1 = localStorage.getItem("token");
 
@@ -177,7 +180,7 @@ export default function HomePage({ isLoged, logedFunc }) {
   }, [token, paramsForGetQoute, tags.length, addedNewQoute]);
   console.log("paramsforgetqoute", paramsForGetQoute);
   console.log("message", message);
-
+  console.log("spinner", spinner);
   return (
     <div className="main-container">
       <div className="main-listOfQuotes-cntnt">
@@ -261,6 +264,12 @@ export default function HomePage({ isLoged, logedFunc }) {
         <h2 className="headingQuote">
           Total number of Quotes <span>{numberOfQoutes}</span>
         </h2>
+        <Menu
+          setParamsForGetQoute={(val) => setParamsForGetQoute(val)}
+          tags={tags}
+          setDisplayAddPost={(val) => setDisplayAddPost(val)}
+          logedFunc={() => logedFunc()}
+        />
         <AddNewPost
           display={displayAddPost}
           closeFunc={() => setDisplayAddPost("hideContent")}
@@ -273,6 +282,7 @@ export default function HomePage({ isLoged, logedFunc }) {
           message={message.text}
           messageFuncSetUp={(val) => setMessage(val)}
         />
+
         <ul className="listOfQoutes">
           {/* {quotes?.map((el) => (
             <li key={el.id}>
@@ -292,6 +302,7 @@ export default function HomePage({ isLoged, logedFunc }) {
               updateQuoteFunc={(prev) => setQuotes(prev)}
               addedQouteFuncTrigger={(e) => setAddedNewQoute(e)}
               alreadyVotedMessagefunc={(e) => setMessage(e)}
+              spinnerFunc={(val) => setSpinner(val)}
             />
           ))}
         </ul>
