@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import Quote from "../../Quotes/Quote";
 import AddNewPost from "../../AddNewPost/AddNewPost";
@@ -7,6 +7,7 @@ import "./HomePage.css";
 import PaginationFor from "../../Pagination/Pagination";
 import PopUpMessage from "../../PopUpMessage/PopUpMessage";
 import Menu from "../../Menu/Menu";
+import Progres from "../../Progres/Progres";
 
 export default function HomePage({ isLoged, logedFunc }) {
   const [addedNewQoute, setAddedNewQoute] = useState(false);
@@ -29,7 +30,7 @@ export default function HomePage({ isLoged, logedFunc }) {
     text: "",
   });
   const [displayMessage, setDisplayMessage] = useState("pop"); // for clasname dipla block
-  const [spinner, setSpinner] = useState(false);
+  const [spinner, setSpinner] = useState("hideProgres"); // don't show spinner inital css class
 
   const tok1 = localStorage.getItem("token");
 
@@ -37,6 +38,14 @@ export default function HomePage({ isLoged, logedFunc }) {
     localStorage.removeItem("token");
     logedFunc(false);
   }
+  const displaySpinner = useCallback(() => {
+    setSpinner("displayProgres");
+    const timer = setTimeout(() => {
+      setSpinner("hideProgres");
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [spinner]);
   function NumberOfPagesForQoutes(numOfQoutes, numOfPages) {
     return Math.ceil(numOfQoutes / numOfPages);
   }
@@ -80,7 +89,6 @@ export default function HomePage({ isLoged, logedFunc }) {
         .then((res) => {
           setQuotes(res.data.quotes);
           setNumberOfQoutes(res.data.quotesCount);
-
         })
         .catch((err) => {});
     }
@@ -111,7 +119,7 @@ export default function HomePage({ isLoged, logedFunc }) {
           message={message.text}
           messageFuncSetUp={(val) => setMessage(val)}
         />
-
+        <Progres displayProgres={spinner} />
         <ul className="listOfQoutes">
           {quotes?.map((el) => (
             <Quote
@@ -125,7 +133,8 @@ export default function HomePage({ isLoged, logedFunc }) {
               updateQuoteFunc={(prev) => setQuotes(prev)}
               addedQouteFuncTrigger={(e) => setAddedNewQoute(e)}
               alreadyVotedMessagefunc={(e) => setMessage(e)}
-              spinnerFunc={(val) => setSpinner(val)}
+              // spinnerFunc={(val) => setSpinner(val)}
+              spinnerFunc={() => displaySpinner()}
             />
           ))}
         </ul>

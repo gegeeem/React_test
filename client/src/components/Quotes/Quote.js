@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import HSLToRGB from "../../HSL to RGB/HslToRgb";
-import Progres from "../Progres/Progres";
 
 export default function Quote({
   id,
@@ -64,10 +63,13 @@ export default function Quote({
     })
       .then((res) => {
         addedQouteFuncTrigger((prev) => !prev);
-        spinnerFunc("display");
+        spinnerFunc();
       })
       .catch((err) => {
-        alert(err);
+        alreadyVotedMessagefunc({
+          type: "warning",
+          text: "Can't provide your action! Please try again later.",
+        });
       });
   }
 
@@ -91,11 +93,10 @@ export default function Quote({
   function downvoteOrDeleteUpvote() {
     if (givenVote === "none") {
       upVoteForPost(id, "downvote", "post");
-     
+
       startVoteAnitamtion();
     } else if (givenVote === "upvote") {
       upVoteForPost(id, "upvote", "delete");
-      
     } else {
       alreadyVotedMessagefunc({
         type: "info",
@@ -108,7 +109,7 @@ export default function Quote({
       <div className="vote">
         <FontAwesomeIcon
           icon={faCaretUp}
-          size={"lg"}
+          size={"xl"}
           beatFade={givenVote === "upvote" && votedAnime}
           color={givenVote !== "upvote" ? "rgb(55, 47, 63)" : ""}
           onClick={() => {
@@ -133,7 +134,7 @@ export default function Quote({
         </div>
         <FontAwesomeIcon
           icon={faCaretDown}
-          size={"lg"}
+          size={"xl"}
           beatFade={givenVote === "downvote" && votedAnime}
           color={givenVote !== "downvote" ? "rgb(55, 47, 63)" : ""}
           onClick={() => {
