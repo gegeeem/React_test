@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faQuoteLeftAlt,
@@ -19,7 +18,7 @@ export default function Menu({
     localStorage.removeItem("token");
     logedFunc(false);
   }
-  console.log("resetAll", resetAllState);
+
   return (
     <div className="menu">
       <div
