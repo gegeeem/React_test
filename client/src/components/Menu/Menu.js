@@ -31,7 +31,10 @@ export default function Menu({
       </div>
       <AscDesc
         label={"Direction"}
-        defaulValue={["asc", "desc"]}
+        defaulValue={[
+          { text: "ASC", value: "asc" },
+          { text: "DESC", value: "desc" },
+        ]}
         changeDirectionFunc={(val) =>
           setParamsForGetQoute((prev) => {
             return { ...prev, sortDirection: val, page: "1" };
@@ -41,7 +44,11 @@ export default function Menu({
 
       <AscDesc
         label={"Sorted By"}
-        defaulValue={["createdAt", "author", "upvotesCount"]}
+        defaulValue={[
+          { text: "Created At", value: "createdAt" },
+          { text: "Author", value: "author" },
+          { text: "UpvotesCount", value: "upvotesCount" },
+        ]}
         changeDirectionFunc={(val) => {
           setParamsForGetQoute((prev) => {
             return { ...prev, sortBy: val, page: "1" };

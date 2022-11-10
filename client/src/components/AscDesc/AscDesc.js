@@ -25,7 +25,7 @@ const theme = createTheme({
 });
 
 export default function AscDesc({ label, defaulValue, changeDirectionFunc }) {
-  const [age, setAge] = React.useState([]);
+  const [age, setAge] = React.useState([defaulValue[0].value]);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -45,8 +45,8 @@ export default function AscDesc({ label, defaulValue, changeDirectionFunc }) {
             onChange={handleChange}
           >
             {defaulValue.map((el) => (
-              <MenuItem key={el} value={el}>
-                {el}
+              <MenuItem key={el.value} value={el.value}>
+                {el.text}
               </MenuItem>
             ))}
           </Select>
