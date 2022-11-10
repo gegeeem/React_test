@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -24,18 +25,28 @@ const theme = createTheme({
   },
 });
 
-export default function AscDesc({ label, defaulValue, changeDirectionFunc }) {
+export default function AscDesc({
+  label,
+  defaulValue,
+  changeDirectionFunc,
+  reset,
+  resetFunc,
+}) {
   const [age, setAge] = React.useState([defaulValue[0].value]);
 
   const handleChange = (event) => {
     setAge(event.target.value);
     changeDirectionFunc(event.target.value);
   };
+  useEffect(() => {
+    setAge([defaulValue[0].value]);
+    resetFunc(false);
+  }, [reset]);
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <Box sx={{ width: 150 }}>
+        <FormControl sx={{ m: 1, width: 150 }}>
           <InputLabel id="demo-simple-select-label">{label}</InputLabel>
           <Select
             labelId="demo-simple-select-label"

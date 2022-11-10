@@ -22,7 +22,7 @@ export default function Quote({
     setVotedAnime(true);
     const timer = setTimeout(() => {
       setVotedAnime(false);
-    }, 3000);
+    }, 3500);
     return () => clearTimeout(timer);
   }
   const gradesPercentage = (upVotes, downVotes) => {

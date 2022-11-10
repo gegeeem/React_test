@@ -14,13 +14,27 @@ export default function Menu({
   setDisplayAddPost,
   logedFunc,
 }) {
+  const [resetAllState, setResetAllState] = useState(false);
   function LogOut() {
     localStorage.removeItem("token");
     logedFunc(false);
   }
+  console.log("resetAll", resetAllState);
   return (
     <div className="menu">
-      <div className="logo">
+      <div
+        className="logo"
+        onClick={() => {
+          setParamsForGetQoute({
+            pageSize: "5",
+            page: "1",
+            sortBy: "createdAt",
+            sortDirection: "asc",
+            tags: "",
+          });
+          setResetAllState(true);
+        }}
+      >
         <sup>
           <FontAwesomeIcon icon={faQuoteLeftAlt} size={"sm"} />
         </sup>
@@ -40,6 +54,8 @@ export default function Menu({
             return { ...prev, sortDirection: val, page: "1" };
           })
         }
+        resetFunc={(val) => setResetAllState(val)}
+        reset={resetAllState}
       />
 
       <AscDesc
@@ -54,9 +70,16 @@ export default function Menu({
             return { ...prev, sortBy: val, page: "1" };
           });
         }}
+        resetFunc={(val) => setResetAllState(val)}
+        reset={resetAllState}
       />
 
-      <TagsMui tags={tags} selectTagsFunc={(e) => setParamsForGetQoute(e)} />
+      <TagsMui
+        tags={tags}
+        selectTagsFunc={(e) => setParamsForGetQoute(e)}
+        resetFunc={(val) => setResetAllState(val)}
+        reset={resetAllState}
+      />
       <button
         className="linkButton"
         onClick={() => setDisplayAddPost("showContent")}

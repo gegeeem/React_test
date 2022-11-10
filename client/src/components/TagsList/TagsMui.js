@@ -36,7 +36,7 @@ const MenuProps = {
   },
 };
 
-export default function TagsMui({ tags, selectTagsFunc }) {
+export default function TagsMui({ tags, selectTagsFunc, reset, resetFunc }) {
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
@@ -59,6 +59,13 @@ export default function TagsMui({ tags, selectTagsFunc }) {
       });
     }
   }, [personName]);
+  useEffect(() => {
+    resetFunc(false);
+    selectTagsFunc((prev) => {
+      return { ...prev, tags: "" };
+    });
+    setPersonName([]);
+  }, [reset]);
 
   return (
     <div>
