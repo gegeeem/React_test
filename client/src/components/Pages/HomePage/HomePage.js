@@ -45,7 +45,8 @@ export default function HomePage({ isLoged, logedFunc }) {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, []); //[spinner]
+    // eslint-disable-next-line
+  }, [spinner]); //[spinner]
   // function NumberOfPagesForQoutes(numOfQoutes, numOfPages) {
   //   return Math.ceil(numOfQoutes / numOfPages);
   // }
