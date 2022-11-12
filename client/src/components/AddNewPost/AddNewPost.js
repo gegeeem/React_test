@@ -34,11 +34,9 @@ export default function AddNewPost({
   }, [tags]);
   function removeTag(index, arrayOfTags) {
     const newArr = [...arrayOfTags];
-    let newArrOfTags;
-    return (newArrOfTags = arrayOfTags =
-      newArr.filter((el, i) => {
-        if (i !== index) return el;
-      }));
+
+    const newArrOfTags = newArr.filter((el, i) => i !== index);
+    return newArrOfTags;
   }
   //sending request for adding a new post
 
@@ -107,6 +105,7 @@ export default function AddNewPost({
       });
       setTags([]);
     }
+    // eslint-disable-next-line
   }, [sendPost]);
 
   return (
