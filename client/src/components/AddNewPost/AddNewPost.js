@@ -34,9 +34,11 @@ export default function AddNewPost({
   }, [tags]);
   function removeTag(index, arrayOfTags) {
     const newArr = [...arrayOfTags];
-    return (arrayOfTags = newArr.filter((el, i) => {
-      if (i !== index) return el;
-    }));
+    let newArrOfTags;
+    return (newArrOfTags = arrayOfTags =
+      newArr.filter((el, i) => {
+        if (i !== index) return el;
+      }));
   }
   //sending request for adding a new post
 
