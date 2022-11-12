@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faQuoteLeft,
   faQuoteLeftAlt,
-  faQuoteRight,
   faQuoteRightAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -26,7 +24,6 @@ export default function Login({ logedFunc }) {
         setInputUserPass({ username: "", password: "" });
       })
       .catch((e) => {
-       
         setErrorMessage("Wrong Username or Password! Please try again");
         setInputUserPass({ username: "", password: "" });
       });

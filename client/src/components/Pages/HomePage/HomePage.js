@@ -11,7 +11,7 @@ import Progres from "../../Progres/Progres";
 
 export default function HomePage({ isLoged, logedFunc }) {
   const [addedNewQoute, setAddedNewQoute] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  // const [token, setToken] = useState(localStorage.getItem("token"));
   const [quotes, setQuotes] = useState([]);
   const [displayAddPost, setDisplayAddPost] = useState("hideContent");
   const [tags, setTags] = useState([]);
@@ -24,20 +24,20 @@ export default function HomePage({ isLoged, logedFunc }) {
   });
 
   const [numberOfQoutes, setNumberOfQoutes] = useState(0);
-  const [pageStep, setPageStep] = useState(1);
+  // const [pageStep, setPageStep] = useState(1);
   const [message, setMessage] = useState({
     type: "success",
     text: "",
   });
-  const [displayMessage, setDisplayMessage] = useState("pop"); // for clasname dipla block
+  // const [displayMessage, setDisplayMessage] = useState("pop"); // for clasname dipla block
   const [spinner, setSpinner] = useState("hideProgres"); // don't show spinner inital css class
 
   const tok1 = localStorage.getItem("token");
 
-  function LogOut() {
-    localStorage.removeItem("token");
-    logedFunc(false);
-  }
+  // function LogOut() {
+  //   localStorage.removeItem("token");
+  //   logedFunc(false);
+  // }
   const displaySpinner = useCallback(() => {
     setSpinner("displayProgres");
     const timer = setTimeout(() => {
@@ -45,23 +45,23 @@ export default function HomePage({ isLoged, logedFunc }) {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [spinner]);
-  function NumberOfPagesForQoutes(numOfQoutes, numOfPages) {
-    return Math.ceil(numOfQoutes / numOfPages);
-  }
+  }, []); //[spinner]
+  // function NumberOfPagesForQoutes(numOfQoutes, numOfPages) {
+  //   return Math.ceil(numOfQoutes / numOfPages);
+  // }
 
   useEffect(() => {
     if (!tok1) {
       logedFunc(false);
     }
-  }, [tok1]);
+  }, [tok1, logedFunc]);
 
   //
-  useEffect(() => {
-    setParamsForGetQoute((prev) => {
-      return { ...prev, page: pageStep.toString() };
-    });
-  }, [pageStep]);
+  // useEffect(() => {
+  //   setParamsForGetQoute((prev) => {
+  //     return { ...prev, page: pageStep.toString() };
+  //   });
+  // }, [paramsForGetQoute.page]);
   useEffect(() => {
     axios
       .get("http://localhost:8000/tags", {
@@ -73,7 +73,7 @@ export default function HomePage({ isLoged, logedFunc }) {
         setTags(res.data);
       })
       .catch((err) => {});
-  }, [tags.length]);
+  }, [tags.length, tok1]);
 
   useEffect(() => {
     function getQoutes(params) {
@@ -93,7 +93,7 @@ export default function HomePage({ isLoged, logedFunc }) {
         .catch((err) => {});
     }
     getQoutes(paramsForGetQoute);
-  }, [token, paramsForGetQoute, tags.length, addedNewQoute, message]);
+  }, [tok1, paramsForGetQoute, tags.length, addedNewQoute, message]);
   return (
     <div className="main-container">
       <div className="main-listOfQuotes-cntnt">

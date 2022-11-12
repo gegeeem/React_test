@@ -1,8 +1,6 @@
 import * as React from "react";
-import Typography from "@mui/material/Typography";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { useEffect } from "react";
 import "./Pagination.css";
 
 export default function PaginationFor({
@@ -10,9 +8,9 @@ export default function PaginationFor({
   numberOfPage,
   selectPageFunc,
 }) {
-  const [page, setPage] = React.useState(currPage);
+  // const [page, setPage] = React.useState(currPage);
   const handleChange = (event, value) => {
-    setPage(value);
+    // setPage(value);
     selectPageFunc(value);
   };
   return (

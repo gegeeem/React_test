@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import "./PopUpMessage.css";
 import { useEffect, useState } from "react";
 
-const typeOfPops = ["error", "warning", "info", "success"];
+// const typeOfPops = ["error", "warning", "info", "success"];
 export default function PopUpMessage({
   typeOfMessage,
   message,

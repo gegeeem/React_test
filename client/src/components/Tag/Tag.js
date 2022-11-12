@@ -1,11 +1,7 @@
 import React from "react";
 import "./Tag.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCaretDown,
-  faCaretUp,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function Tag({ name, removeFunc }) {
   return (
