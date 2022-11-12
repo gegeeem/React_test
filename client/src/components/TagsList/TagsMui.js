@@ -58,6 +58,7 @@ export default function TagsMui({ tags, selectTagsFunc, reset, resetFunc }) {
         return { ...prev, tags: "" };
       });
     }
+    // eslint-disable-next-line
   }, [personName]);
   useEffect(() => {
     resetFunc(false);
