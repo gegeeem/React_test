@@ -65,6 +65,7 @@ export default function TagsMui({ tags, selectTagsFunc, reset, resetFunc }) {
       return { ...prev, tags: "" };
     });
     setPersonName([]);
+    // eslint-disable-next-line
   }, [reset]);
 
   return (

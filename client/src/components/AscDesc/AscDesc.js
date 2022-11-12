@@ -41,6 +41,7 @@ export default function AscDesc({
   useEffect(() => {
     setAge([defaulValue[0].value]);
     resetFunc(false);
+    // eslint-disable-next-line
   }, [reset]);
 
   return (

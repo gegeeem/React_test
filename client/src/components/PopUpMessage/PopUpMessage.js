@@ -24,6 +24,7 @@ export default function PopUpMessage({
     if (message) {
       PopMessage();
     }
+    // eslint-disable-next-line
   }, [message]);
   return (
     <div className={displayMessage}>
