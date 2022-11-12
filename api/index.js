@@ -2,8 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { uuid } = require("uuidv4");
 const port = 8000;
-const serverless = require("serverless-http");
-module.exports.handler = serverless(app);
+
 const USERS = [
   {
     id: "d964099a-1a2a-46f5-9782-e2601b5aac9e",
