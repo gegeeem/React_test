@@ -39,57 +39,58 @@ export default function AddNewPost({
     }));
   }
   //sending request for adding a new post
-  function addPostRequest(newQuoteForAdd) {
-    axios
-      .post("http://localhost:8000/quotes", newQuoteForAdd, {
-        headers: {
-          Authorization: "Bearer " + tok1,
-        },
-      })
-      .then((response) => {
-        setSendPost({
-          content: "",
-          author: "",
-          tags: [],
-        });
-        setNewPost({
-          content: "",
-          author: "",
-          tags: [],
-        });
-        setTags([]);
-        setTag("");
-        addNewQouteFunc((prev) => {
-          return [...prev, response.data];
-        });
-        addNewQouteTagFunc((prev) => {
-          return [...prev, response.data.tags];
-        });
 
-        showMessage({
-          type: "success",
-          text: "Qoute is " + response.statusText,
-        });
-      })
-      .catch((e) => {
-        setSendPost({
-          content: "",
-          author: "",
-          tags: [],
-        });
-        setNewPost({
-          content: "",
-          author: "",
-          tags: [],
-        });
-        setTag("");
-        setTags([]);
-
-        showMessage({ type: "warning", text: e.response.data.author });
-        alert(e);
-      });
-  }
   useEffect(() => {
+    function addPostRequest(newQuoteForAdd) {
+      axios
+        .post("http://localhost:8000/quotes", newQuoteForAdd, {
+          headers: {
+            Authorization: "Bearer " + tok1,
+          },
+        })
+        .then((response) => {
+          setSendPost({
+            content: "",
+            author: "",
+            tags: [],
+          });
+          setNewPost({
+            content: "",
+            author: "",
+            tags: [],
+          });
+          setTags([]);
+          setTag("");
+          addNewQouteFunc((prev) => {
+            return [...prev, response.data];
+          });
+          addNewQouteTagFunc((prev) => {
+            return [...prev, response.data.tags];
+          });
+
+          showMessage({
+            type: "success",
+            text: "Qoute is " + response.statusText,
+          });
+        })
+        .catch((e) => {
+          setSendPost({
+            content: "",
+            author: "",
+            tags: [],
+          });
+          setNewPost({
+            content: "",
+            author: "",
+            tags: [],
+          });
+          setTag("");
+          setTags([]);
+
+          showMessage({ type: "warning", text: e.response.data.author });
+          alert(e);
+        });
+    }
     if (sendPost.content) {
       addPostRequest(sendPost);
       setSendPost({
