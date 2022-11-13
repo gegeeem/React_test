@@ -31,6 +31,7 @@ export default function AscDesc({
   changeDirectionFunc,
   reset,
   resetFunc,
+  
 }) {
   const [age, setAge] = React.useState([defaulValue[0].value]);
 
