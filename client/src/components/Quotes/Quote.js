@@ -12,7 +12,6 @@ export default function Quote({
   upvotesCount,
   downvotesCount,
   givenVote,
-  updateQuoteFunc,
   addedQouteFuncTrigger,
   alreadyVotedMessagefunc,
   spinnerFunc,

@@ -131,10 +131,8 @@ export default function HomePage({ isLoged, logedFunc }) {
               upvotesCount={el.upvotesCount}
               downvotesCount={el.downvotesCount}
               givenVote={el.givenVote}
-              updateQuoteFunc={(prev) => setQuotes(prev)}
               addedQouteFuncTrigger={(e) => setAddedNewQoute(e)}
               alreadyVotedMessagefunc={(e) => setMessage(e)}
-              // spinnerFunc={(val) => setSpinner(val)}
               spinnerFunc={() => displaySpinner()}
             />
           ))}
