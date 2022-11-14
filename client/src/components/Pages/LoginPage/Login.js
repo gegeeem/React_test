@@ -65,6 +65,7 @@ export default function Login({ logedFunc }) {
                     return { ...prev, username: e.target.value };
                   })
                 }
+                autoComplete="true"
               />
             </div>
             <div className="input-control">
@@ -85,6 +86,7 @@ export default function Login({ logedFunc }) {
                   });
                 }}
                 value={inputUserPass.password}
+                autoComplete="true"
               />
             </div>
             <div className="input-control">
