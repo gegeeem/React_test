@@ -20,7 +20,6 @@ export default function Login({ logedFunc }) {
       .then((response) => {
         localStorage.setItem("token", response.data.accessToken);
         logedFunc(response.data.accessToken);
-        setErrorMessage(`poruka sa logina`);
         setInputUserPass({ username: "", password: "" });
       })
       .catch((e) => {

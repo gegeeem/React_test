@@ -8,9 +8,9 @@ export default function PaginationFor({
   numberOfPage,
   selectPageFunc,
 }) {
-  // const [page, setPage] = React.useState(currPage);
+  const [page, setPage] = React.useState(currPage);
   const handleChange = (event, value) => {
-    // setPage(value);
+    setPage(value);
     selectPageFunc(value);
   };
   return (
