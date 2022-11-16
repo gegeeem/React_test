@@ -17,7 +17,7 @@ export default function HomePage({ isLoged, logedFunc }) {
   const [tags, setTags] = useState([]);
   const [paramsForGetQoute, setParamsForGetQoute] = useState({
     pageSize: "5",
-    page: "",
+    page: "1",
     sortBy: "createdAt",
     sortDirection: "asc",
     tags: "",
