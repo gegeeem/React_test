@@ -3,7 +3,7 @@ import "../Quotes/Quotes.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import HSLToRGB from "../../HSL to RGB/HslToRgb";
+import HSLToRGB from "../../HSLtoRGB/HslToRgb";
 
 export default function Quote({
   id,

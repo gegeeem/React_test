@@ -14,7 +14,7 @@ export default function Login({ logedFunc }) {
     password: "",
   });
 
-  function LogIn(login) {
+  function logIn(login) {
     axios
       .post("http://localhost:8000/sessions", login)
       .then((response) => {
@@ -95,7 +95,7 @@ export default function Login({ logedFunc }) {
                   className="input-submit"
                   value="Sign In"
                   onClick={(e) => {
-                    LogIn(inputUserPass);
+                    logIn(inputUserPass);
                     e.preventDefault();
                   }}
                 />
