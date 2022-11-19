@@ -95,7 +95,6 @@ export default function HomePage({ isLoged, logedFunc }) {
     }
     getQoutes(paramsForGetQoute);
   }, [tok1, paramsForGetQoute, tags.length, addedNewQoute, message]);
-  console.log(+paramsForGetQoute.page);
   return (
     <div className="main-container">
       <div className="main-listOfQuotes-cntnt">

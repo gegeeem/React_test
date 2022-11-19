@@ -45,8 +45,8 @@ export default function Menu({
       <AscDesc
         label={"Direction"}
         defaulValue={[
-          { text: "ASC", value: "asc" },
           { text: "DESC", value: "desc" },
+          { text: "ASC", value: "asc" },
         ]}
         changeDirectionFunc={(val) =>
           setParamsForGetQoute((prev) => {
